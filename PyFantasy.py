@@ -25,11 +25,11 @@ while resp != "0":
     print("|-            Fantasy Wardrobe            -|")
     print("|-                                        -|")
     print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-    print("|-          1 - Roupas e Fantasias        -|")
-    print("|-          2 - Clientes                  -|")
-    print("|-          3 - Funcionários              -|")
-    print("|-          4 - Gerenciar Locação         -|")
-    print("|-          0 - Sair do sistema           -|")
+    print("|-        1 - Roupas e Fantasias          -|")
+    print("|-        2 - Clientes                    -|")
+    print("|-        3 - Funcionários                -|")
+    print("|-        4 - Gerenciar Locação           -|")
+    print("|-        0 - Sair do sistema             -|")
     print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
     resp = input("Digite o número do módulo que quer acessar: ")
@@ -248,6 +248,10 @@ while resp != "0":
                 }
                 
                 print("(ID: %d) Cliente adicionado com sucesso!"%(id_cliente))
+                
+                print()
+                input("Aperte (ENTER) para retornar.")
+                print()
         
             elif resp_clientes == "3":
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
@@ -255,10 +259,32 @@ while resp != "0":
                 print("|-      Remover clientes      -|")
                 print("|-                            -|")
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-                print("|-                            -|")
-                print("|-     Em desenvolvimento     -|")
-                print("|-                            -|")
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                
+                id_cliente = ""
+                while id_cliente != 0:
+                    while True:
+                        try:
+                            id_cliente = int(input("Digite o ID do cliente (ou 0 para cancelar): "))
+                            print()
+                        except ValueError:
+                            print()
+                            print("Erro: Um ID consiste apenas em números.")
+                            continue
+                        break
+
+                    if id_cliente in clientes:
+                        print("Cliente > ID:", id_cliente,"-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                        print("Endereço:", clientes[id_cliente]["Endereco"])
+                        print("Tem certeza que deseja remover esse cliente?")
+                        decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
+                        
+                        if decisao.lower() == "s":
+                            del clientes[id_cliente]
+                            break
+                    else:
+                        print("Não existe um cliente com esse ID.")
+                        break
+                
                 print()
                 input("Aperte (ENTER) para retornar.")
                 print()
