@@ -1,13 +1,11 @@
-roupas = {
-    "Comuns": {                
-        1: {
-            "Nome": "Vestido",
-            "Valor": 80,
-            "Descricao": "Vestido vermelho com listras.",
-            "Tamanho": "G"
-        },
+roupas = {              
+    1: {
+        "Nome": "Vestido",
+        "Valor": 80,
+        "Descricao": "Vestido vermelho com listras.",
+        "Tamanho": "G",
+        "Categoria": "Comum"
     },
-    "Fantasias": {}
 }
 
 resp = ""
@@ -54,8 +52,8 @@ while resp != "0":
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print()
                 
-                for key, value in roupas["Comuns"].items():
-                    print("> ID:", key,"-", value["Nome"], "- Tamanho:", value["Tamanho"], "- Valor: R$", value["Valor"])
+                for key, value in roupas.items():
+                    print("> ID:", key,"-", value["Nome"], "| Tamanho:", value["Tamanho"], "| Valor: R$", value["Valor"], "| Categoria:", value["Categoria"])
                     
                 print()
                 input("Aperte (ENTER) para continuar.")
@@ -96,12 +94,25 @@ while resp != "0":
                     print("Tamanho inválido. Tente novamente! Tamanhos válidos: (PP, P, M, G, GG, XG)")
                     tam_produto = input("Digite o tamanho do produto: ")
                     
-                id_produto = len(roupas["Comuns"]) + 1
-                roupas["Comuns"][id_produto] = {
-                    "Nome": nome_produto,
+                print("Categorias válidas: Comum (1), Fantasia (2)")
+                ctg_produto = input("Digite o número da categoria do produto: ")
+                
+                while ctg_produto != "1" and ctg_produto != "2":
+                    print("Categoria inválida. Tente novamente! Categorias válidas: Comum (1), Fantasia (2)")
+                    ctg_produto = input("Digite o número da categoria do produto: ")
+                    
+                if ctg_produto == "1":
+                    ctg_produto = "Comum"
+                else:
+                    ctg_produto = "Fantasia"
+                
+                id_produto = len(roupas) + 1
+                roupas[id_produto] = {
+                    "Nome": nome_produto.capitalize(),
                     "Valor": valor_produto,
                     "Descricao": desc_produto,
-                    "Tamanho": tam_produto
+                    "Tamanho": tam_produto.upper(),
+                    "Categoria": ctg_produto
                 }
                 print("(ID: %d) Produto adicionado com sucesso!"%(id_produto))
 
