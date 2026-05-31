@@ -5,7 +5,17 @@ roupas = {
         "Descricao": "Terno preto com gravata.",
         "Tamanho": "G",
         "Categoria": "Comum"
-    },
+    }
+}
+
+clientes = {
+    1: {
+        "Nome": "Fulano de Tal",
+        "CPF": "12345678900",
+        "Telefone": "(00) 12345-6789",
+        "Email": "fulano5@gmail.com",
+        "Endereco": "Rua das Palmeiras, 245, Lagoa Nova, Natal - RN, CEP 59075-320"
+    }
 }
 
 resp = ""
@@ -128,13 +138,13 @@ while resp != "0":
                 input("Aperte (ENTER) para continuar.")
                 print()
             elif resp_roupas == "3":
+                print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                            -|")
-                print("|-     SubMódulo de Remover   -|")
-                print("|-          produtos          -|")
+                print("|-       Remover produto      -|")
                 print("|-                            -|")
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-
+                print()
                 
                 id_produto = ""
                 while id_produto != 0:
@@ -165,18 +175,93 @@ while resp != "0":
                 print()
     
     elif resp == "2":
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print("|-                            -|")
-        print("|-     Módulo de Clientes     -|")
-        print("|-                            -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print("|-                            -|")
-        print("|-     Em desenvolvimento     -|")
-        print("|-                            -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print()
-        input("Aperte (ENTER) para continuar.")
-        print()
+        
+        resp_clientes = ""
+        while resp_clientes != "0":
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            print("|-                                      -|")
+            print("|-          Módulo de Clientes          -|")
+            print("|-                                      -|")
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            print("|-     1 - Listar todos os clientes     -|")
+            print("|-     2 - Adicionar clientes           -|")
+            print("|-     3 - Remover clientes             -|")
+            print("|-     0 - Voltar                       -|")
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            
+            resp_clientes = input("Digite o número do submódulo que quer acessar: ")
+            
+            if resp_clientes == "1":
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                            -|")
+                print("|-      Todos os clientes     -|")
+                print("|-                            -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print()
+                
+                if len(clientes) > 0:
+                    for key, value in clientes.items():
+                        print("> ID:", key,"-", value["Nome"], "| CPF:", value["CPF"], "| Telefone:", value["Telefone"], "| E-mail:", value["Email"])
+                        print("Endereço:", value["Endereco"])
+                else:
+                    print("Não existe nenhum cliente cadastrado no sistema.")
+                    
+                print()
+                input("Aperte (ENTER) para continuar.")
+                print()
+                
+            elif resp_clientes == "2":
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                            -|")
+                print("|-     Adicionar clientes     -|")
+                print("|-                            -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print()
+                
+                nome_cliente = input("Digite o nome do cliente: ")
+                
+                cpf_cliente = input("Digite o CPF do cliente (apenas números): ")
+                while len(cpf_cliente) != 11:
+                    print("CPF inválido. Tente novamente.")
+                    cpf_cliente = input("Digite o CPF do cliente (apenas números): ")
+                    
+                print("Modelo de telefone: (00) 00000-0000")
+                tel_cliente = input("Digite o telefone do cliente: ")
+                    
+                email_cliente = input("Digite o e-mail do cliente: ")
+                
+                endereco_cliente = input("Digite o endereço do cliente: ")
+                
+                id_cliente = 1
+                
+                if len(clientes) > 0:
+                    id_cliente = list(clientes.keys())[-1] + 1
+                    
+                clientes[id_cliente] = {
+                    "Nome": nome_cliente,
+                    "CPF": cpf_cliente,
+                    "Telefone": tel_cliente,
+                    "Email": email_cliente,
+                    "Endereco": endereco_cliente
+                }
+                
+                print("(ID: %d) Cliente adicionado com sucesso!"%(id_cliente))
+        
+            elif resp_clientes == "3":
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                            -|")
+                print("|-      Remover clientes      -|")
+                print("|-                            -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                            -|")
+                print("|-     Em desenvolvimento     -|")
+                print("|-                            -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print()
+                input("Aperte (ENTER) para retornar.")
+                print()
 
     elif resp == "3":
         print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
@@ -189,7 +274,7 @@ while resp != "0":
         print("|-                            -|")
         print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         print()
-        input("Aperte (ENTER) para continuar.")
+        input("Aperte (ENTER) para retornar.")
         print()
 
     elif resp == "4":
@@ -203,7 +288,7 @@ while resp != "0":
         print("|-                            -|")
         print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
         print()
-        input("Aperte (ENTER) para continuar.")
+        input("Aperte (ENTER) para retornar.")
         print()
 
 
