@@ -1,8 +1,8 @@
 roupas = {              
     1: {
-        "Nome": "Vestido",
+        "Nome": "Terno",
         "Valor": 80,
-        "Descricao": "Vestido vermelho com listras.",
+        "Descricao": "Terno preto com gravata.",
         "Tamanho": "G",
         "Categoria": "Comum"
     },
@@ -52,9 +52,12 @@ while resp != "0":
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print()
                 
-                for key, value in roupas.items():
-                    print("> ID:", key,"-", value["Nome"], "| Tamanho:", value["Tamanho"], "| Valor: R$", value["Valor"], "| Categoria:", value["Categoria"])
-                    
+                if len(roupas) > 0:
+                    for key, value in roupas.items():
+                        print("> ID:", key,"-", value["Nome"], "| Tamanho:", value["Tamanho"], "| Valor: R$", value["Valor"], "| Categoria:", value["Categoria"])
+                else:
+                    print("Não existe nenhum produto cadastrado no sistema.")
+                   
                 print()
                 input("Aperte (ENTER) para continuar.")
                 print()
@@ -98,6 +101,7 @@ while resp != "0":
                 ctg_produto = input("Digite o número da categoria do produto: ")
                 
                 while ctg_produto != "1" and ctg_produto != "2":
+                    print()
                     print("Categoria inválida. Tente novamente! Categorias válidas: Comum (1), Fantasia (2)")
                     ctg_produto = input("Digite o número da categoria do produto: ")
                     
@@ -106,7 +110,11 @@ while resp != "0":
                 else:
                     ctg_produto = "Fantasia"
                 
-                id_produto = len(roupas) + 1
+                id_produto = 1
+                
+                if len(roupas) > 0:
+                    id_produto = list(roupas.keys())[-1] + 1
+                    
                 roupas[id_produto] = {
                     "Nome": nome_produto.capitalize(),
                     "Valor": valor_produto,
@@ -126,16 +134,35 @@ while resp != "0":
                 print("|-          produtos          -|")
                 print("|-                            -|")
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-                print("|-                            -|")
-                print("|-     Em desenvolvimento     -|")
-                print("|-                            -|")
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+
+                
+                id_produto = ""
+                while id_produto != 0:
+                    while True:
+                        try:
+                            id_produto = int(input("Digite o ID do produto (ou 0 para cancelar): "))
+                            print()
+                        except ValueError:
+                            print()
+                            print("Erro: Um ID consiste apenas em números.")
+                            continue
+                        break
+
+                    if id_produto in roupas:
+                        print("Produto > ID:", id_produto,"-", roupas[id_produto]["Nome"], "| Tamanho:", roupas[id_produto]["Tamanho"], "| Valor: R$", roupas[id_produto]["Valor"], "| Categoria:", roupas[id_produto]["Categoria"])
+                        print("Tem certeza que deseja remover esse produto?")
+                        decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
+                        
+                        if decisao.lower() == "s":
+                            del roupas[id_produto]
+                            break
+                    else:
+                        print("Não existe um produto com esse ID.")
+                        break
+
                 print()
                 input("Aperte (ENTER) para continuar.")
                 print()
-
-        
-
     
     elif resp == "2":
         print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
