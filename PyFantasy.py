@@ -12,9 +12,19 @@ clientes = {
     1: {
         "Nome": "Fulano de Tal",
         "CPF": "12345678900",
-        "Telefone": "(00) 12345-6789",
+        "Telefone": "(84) 12345-6789",
         "Email": "fulano5@gmail.com",
         "Endereco": "Rua das Palmeiras, 245, Lagoa Nova, Natal - RN, CEP 59075-320"
+    }
+}
+
+funcionarios = {
+    1: {
+        "Nome": "Beltrano da Silva",
+        "CPF": "98765432100",
+        "Telefone": "(84) 54321-6789",
+        "Email": "beltrano1@gmail.com",
+        "Endereco": "Rua das Palmeiras, 246, Lagoa Nova, Natal - RN, CEP 59075-320"
     }
 }
 
@@ -240,7 +250,7 @@ while resp != "0":
                     id_cliente = list(clientes.keys())[-1] + 1
                     
                 clientes[id_cliente] = {
-                    "Nome": nome_cliente,
+                    "Nome": nome_cliente.title(),
                     "CPF": cpf_cliente,
                     "Telefone": tel_cliente,
                     "Email": email_cliente,
@@ -290,18 +300,121 @@ while resp != "0":
                 print()
 
     elif resp == "3":
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print("|-                            -|")
-        print("|-    Módulo de Funcionários  -|")
-        print("|-                            -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print("|-                            -|")
-        print("|-     Em desenvolvimento     -|")
-        print("|-                            -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print()
-        input("Aperte (ENTER) para retornar.")
-        print()
+        
+        resp_funcionarios = ""
+        while resp_funcionarios != "0":
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            print("|-                                          -|")
+            print("|-          Módulo de Funcionários          -|")
+            print("|-                                          -|")
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            print("|-     1 - Listar todos os funcionários     -|")
+            print("|-     2 - Adicionar funcionários           -|")
+            print("|-     3 - Remover funcionários             -|")
+            print("|-     0 - Voltar                           -|")
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            
+            resp_funcionarios = input("Digite o número do submódulo que quer acessar: ")
+            
+            if resp_funcionarios == "1":
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-      Todos os Funcionários       -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print()
+ 
+                if len(funcionarios) > 0:
+                    for key, value in funcionarios.items():
+                        print("> ID:", key, "-", value["Nome"], "| CPF:", value["CPF"], "| Telefone:", value["Telefone"], "| E-mail:", value["Email"])
+                        print("Endereço:", value["Endereco"])
+                else:
+                    print("Não existe nenhum funcionário cadastrado no sistema.")
+                    
+                print()
+                input("Aperte (ENTER) para continuar.")
+                print()
+            
+            elif resp_funcionarios == "2":
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-      Adicionar funcionário       -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print()
+ 
+                nome_funcionario = input("Digite o nome do funcionário: ")
+ 
+                cpf_funcionario = input("Digite o CPF do funcionário (apenas números): ")
+                while len(cpf_funcionario) != 11:
+                    print("CPF inválido. Tente novamente.")
+                    cpf_funcionario = input("Digite o CPF do funcionário (apenas números): ")
+ 
+                print("Modelo de telefone: (00) 00000-0000")
+                tel_funcionario = input("Digite o telefone do funcionário: ")
+ 
+                email_funcionario = input("Digite o e-mail do funcionário: ")
+ 
+                endereco_funcionario = input("Digite o endereço do funcionário: ")
+ 
+                id_funcionario = 1
+ 
+                if len(funcionarios) > 0:
+                    id_funcionario = list(funcionarios.keys())[-1] + 1
+ 
+                funcionarios[id_funcionario] = {
+                    "Nome": nome_funcionario.title(),
+                    "CPF": cpf_funcionario,
+                    "Telefone": tel_funcionario,
+                    "Email": email_funcionario,
+                    "Endereco": endereco_funcionario
+                }
+ 
+                print("(ID: %d) Funcionário adicionado com sucesso!"%(id_funcionario))
+ 
+                print()
+                input("Aperte (ENTER) para retornar.")
+                print()
+            elif resp_funcionarios == "3":
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-      Remover funcionário         -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print()
+ 
+                id_funcionario = ""
+                while id_funcionario != 0:
+                    while True:
+                        try:
+                            id_funcionario = int(input("Digite o ID do funcionário (ou 0 para cancelar): "))
+                            print()
+                        except ValueError:
+                            print()
+                            print("Erro: Um ID consiste apenas em números.")
+                            continue
+                        break
+ 
+                    if id_funcionario in funcionarios:
+                        print("Funcionário > ID:", id_funcionario, "-", funcionarios[id_funcionario]["Nome"], "| CPF:", funcionarios[id_funcionario]["CPF"], "| Telefone:", funcionarios[id_funcionario]["Telefone"], "| E-mail:", funcionarios[id_funcionario]["Email"])
+                        print("Endereço:", funcionarios[id_funcionario]["Endereco"])
+                        print("Tem certeza que deseja remover esse funcionário?")
+                        decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
+ 
+                        if decisao.lower() == "s":
+                            del funcionarios[id_funcionario]
+                            break
+                    else:
+                        print("Não existe um funcionário com esse ID.")
+                        break
+ 
+                print()
+                input("Aperte (ENTER) para retornar.")
+                print()        
+                
 
     elif resp == "4":
         print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
