@@ -1,3 +1,5 @@
+import os
+
 roupas = {              
     1: {
         "Nome": "Terno",
@@ -28,8 +30,18 @@ funcionarios = {
     }
 }
 
+locacoes = {
+    1: {
+        "ID_Cliente": 1,
+        "ID_Produto": 1,
+        "CheckIn": "25/05/2026",
+        "CheckOut": "30/06/2026"
+    }
+}
+
 resp = ""
 while resp != "0":
+    os.system("cls" if os.name == "nt" else "clear")
     print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
     print("|-                                        -|")
     print("|-            Fantasy Wardrobe            -|")
@@ -48,6 +60,8 @@ while resp != "0":
 
         resp_roupas = ""
         while resp_roupas != "0":
+            
+            os.system("cls" if os.name == "nt" else "clear")
             print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
             print("|-                                      -|")
             print("|-            Módulo de Roupas          -|")
@@ -63,6 +77,7 @@ while resp != "0":
             resp_roupas = input("Digite o número do submódulo que quer acessar: ")
 
             if resp_roupas == "1":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                                -|")
@@ -74,7 +89,7 @@ while resp != "0":
                 
                 if len(roupas) > 0:
                     for key, value in roupas.items():
-                        print("> ID:", key,"-", value["Nome"], "| Tamanho:", value["Tamanho"], "| Valor: R$", value["Valor"], "| Categoria:", value["Categoria"])
+                        print("Produto > ID:", key,"-", value["Nome"], "| Tamanho:", value["Tamanho"], "| Valor: R$", value["Valor"], "| Categoria:", value["Categoria"])
                 else:
                     print("Não existe nenhum produto cadastrado no sistema.")
                    
@@ -83,6 +98,7 @@ while resp != "0":
                 print()
 
             elif resp_roupas == "2":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                            -|")
@@ -148,6 +164,7 @@ while resp != "0":
                 input("Aperte (ENTER) para continuar.")
                 print()
             elif resp_roupas == "3":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                            -|")
@@ -177,7 +194,8 @@ while resp != "0":
                             del roupas[id_produto]
                             break
                     else:
-                        print("Não existe um produto com esse ID.")
+                        if id_produto != 0:
+                            print("Não existe um produto com esse ID.")
                         break
 
                 print()
@@ -188,6 +206,8 @@ while resp != "0":
         
         resp_clientes = ""
         while resp_clientes != "0":
+            os.system("cls" if os.name == "nt" else "clear")
+            
             print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
             print("|-                                      -|")
             print("|-          Módulo de Clientes          -|")
@@ -202,6 +222,7 @@ while resp != "0":
             resp_clientes = input("Digite o número do submódulo que quer acessar: ")
             
             if resp_clientes == "1":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                            -|")
@@ -212,7 +233,7 @@ while resp != "0":
                 
                 if len(clientes) > 0:
                     for key, value in clientes.items():
-                        print("> ID:", key,"-", value["Nome"], "| CPF:", value["CPF"], "| Telefone:", value["Telefone"], "| E-mail:", value["Email"])
+                        print("Cliente > ID:", key,"-", value["Nome"], "| CPF:", value["CPF"], "| Telefone:", value["Telefone"], "| E-mail:", value["Email"])
                         print("Endereço:", value["Endereco"])
                 else:
                     print("Não existe nenhum cliente cadastrado no sistema.")
@@ -222,6 +243,7 @@ while resp != "0":
                 print()
                 
             elif resp_clientes == "2":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                            -|")
@@ -264,6 +286,7 @@ while resp != "0":
                 print()
         
             elif resp_clientes == "3":
+                os.system("cls" if os.name == "nt" else "clear")
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                            -|")
                 print("|-      Remover clientes      -|")
@@ -292,7 +315,8 @@ while resp != "0":
                             del clientes[id_cliente]
                             break
                     else:
-                        print("Não existe um cliente com esse ID.")
+                        if id_cliente != 0:
+                            print("Não existe um cliente com esse ID.")
                         break
                 
                 print()
@@ -303,6 +327,8 @@ while resp != "0":
         
         resp_funcionarios = ""
         while resp_funcionarios != "0":
+            os.system("cls" if os.name == "nt" else "clear")
+            
             print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
             print("|-                                          -|")
             print("|-          Módulo de Funcionários          -|")
@@ -317,6 +343,7 @@ while resp != "0":
             resp_funcionarios = input("Digite o número do submódulo que quer acessar: ")
             
             if resp_funcionarios == "1":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                                  -|")
@@ -337,6 +364,7 @@ while resp != "0":
                 print()
             
             elif resp_funcionarios == "2":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                                  -|")
@@ -378,10 +406,11 @@ while resp != "0":
                 input("Aperte (ENTER) para retornar.")
                 print()
             elif resp_funcionarios == "3":
+                os.system("cls" if os.name == "nt" else "clear")
                 print()
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print("|-                                  -|")
-                print("|-      Remover funcionário         -|")
+                print("|-       Remover funcionário        -|")
                 print("|-                                  -|")
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
                 print()
@@ -408,7 +437,8 @@ while resp != "0":
                             del funcionarios[id_funcionario]
                             break
                     else:
-                        print("Não existe um funcionário com esse ID.")
+                        if id_funcionario != 0:
+                            print("Não existe um funcionário com esse ID.")
                         break
  
                 print()
@@ -417,17 +447,85 @@ while resp != "0":
                 
 
     elif resp == "4":
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print("|-                            -|")
-        print("|-    Módulo de Locações      -|")
-        print("|-                            -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print("|-                            -|")
-        print("|-     Em desenvolvimento     -|")
-        print("|-                            -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-        print()
-        input("Aperte (ENTER) para retornar.")
-        print()
+        
+        resp_locacoes = ""
+        while resp_locacoes != "0":
+            os.system("cls" if os.name == "nt" else "clear")
+            
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            print("|-                                        -|")
+            print("|-           Módulo de Locações           -|")
+            print("|-                                        -|")
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            print("|-     1 - Listar todas as locações       -|")
+            print("|-     2 - Adicionar locação              -|")
+            print("|-     3 - Remover locação                -|")
+            print("|-     0 - Voltar                         -|")
+            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
 
-
+            resp_locacoes = input("Digite o número do submódulo que quer acessar: ")
+ 
+            if resp_locacoes == "1":
+                os.system("cls" if os.name == "nt" else "clear")
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-       Todas as Locações          -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print()
+ 
+                if len(locacoes) > 0:
+                    for key, value in locacoes.items():
+                        if value["ID_Cliente"] in clientes:
+                            nome_cliente_locacao = clientes[value["ID_Cliente"]]["Nome"]
+                        else:
+                            nome_cliente_locacao = "Cliente Excluído"
+                            
+                        if value["ID_Produto"] in roupas:
+                            nome_produto_locacao = roupas[value["ID_Produto"]]["Nome"]
+                        else:
+                            nome_produto_locacao = "Produto Excluído" 
+                            
+                        print("Locação > ID:", key, "| Cliente:", nome_cliente_locacao, "(ID:", str(value["ID_Cliente"]) + ")", "| Produto:", nome_produto_locacao, "(ID:", str(value["ID_Produto"]) + ")")
+                        print("Check-in:", value["CheckIn"], "| Check-out:", value["CheckOut"])
+                else:
+                    print("Não existe nenhuma locação cadastrada no sistema.")
+ 
+                print()
+                input("Aperte (ENTER) para continuar.")
+                print()
+                
+            elif resp_locacoes == "2":
+                os.system("cls" if os.name == "nt" else "clear")
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-         Adicionar Locações       -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-         Em Desenvolvimento       -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                
+                print()
+                input("Aperte (ENTER) para continuar.")
+                print()
+                
+            elif resp_locacoes == "3":
+                os.system("cls" if os.name == "nt" else "clear")
+                print()
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-         Remover Locações         -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                print("|-                                  -|")
+                print("|-         Em Desenvolvimento       -|")
+                print("|-                                  -|")
+                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                
+                print()
+                input("Aperte (ENTER) para continuar.")
+                print()
