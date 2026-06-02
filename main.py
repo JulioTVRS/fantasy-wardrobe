@@ -129,7 +129,7 @@ while resp != "0":
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
                 print()
 
-                id_produto = int(input("Digite o ID do produto (ou 0 para cancelar): "))
+                id_produto = input("Digite o ID do produto (ou 0 para cancelar): ")
 
                 if id_produto != 0:
                     decisao = input("Tem certeza? (S para remover): ")
@@ -207,7 +207,7 @@ while resp != "0":
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
                 print()
 
-                id_cliente = int(input("Digite o ID do cliente (ou 0 para cancelar): "))
+                id_cliente = input("Digite o ID do cliente (ou 0 para cancelar): ")
 
                 if id_cliente != 0:
                     decisao = input("Tem certeza? (S para remover): ")
@@ -338,8 +338,8 @@ while resp != "0":
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
                 print()
 
-                id_cliente_loc = int(input("Digite o ID do cliente: "))
-                id_produto_loc = int(input("Digite o ID do produto: "))
+                id_cliente_loc = input("Digite o ID do cliente: ")
+                id_produto_loc = input("Digite o ID do produto: ")
                 print("Formato de data: DD/MM/AAAA")
                 checkin_loc = input("Digite a data de Check-in: ")
                 checkout_loc = input("Digite a data de Check-out: ")
@@ -362,7 +362,7 @@ while resp != "0":
                 print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
                 print()
 
-                id_locacao = int(input("Digite o ID da locação (ou 0 para cancelar): "))
+                id_locacao = input("Digite o ID da locação (ou 0 para cancelar): ")
 
                 if id_locacao != 0:
                     decisao = input("Tem certeza? (S para remover): ")
