@@ -1,4 +1,5 @@
 import os
+import pickle
 
 # Dicionários já com dados para acelerar os testes
 
@@ -40,6 +41,26 @@ locacoes = {
         "CheckOut": "30/06/2026"
     }
 }
+
+if os.path.exists("roupas.dat"):
+    roupasArquivo = open("roupas.dat", "rb")
+    roupas = pickle.load(roupasArquivo)
+    roupasArquivo.close()
+    
+if os.path.exists("clientes.dat"):
+    clientesArquivo = open("clientes.dat", "rb")
+    clientes = pickle.load(clientesArquivo)
+    clientesArquivo.close()
+
+if os.path.exists("funcionarios.dat"):
+    funcionariosArquivo = open("funcionarios.dat", "rb")
+    funcionarios = pickle.load(funcionariosArquivo)
+    funcionariosArquivo.close()
+    
+if os.path.exists("locacoes.dat"):
+    locacoesArquivo = open("locacoes.dat", "rb")
+    locacoes = pickle.load(locacoesArquivo)
+    locacoesArquivo.close()
 
 resp = ""
 while resp != "0":
@@ -889,3 +910,21 @@ while resp != "0":
         print()
         input("Aperte (ENTER) para retornar.")
         print()
+        
+
+
+roupasArquivo = open("roupas.dat", "wb")
+pickle.dump(roupas, roupasArquivo)
+roupasArquivo.close()
+
+clientesArquivo = open("clientes.dat", "wb")
+pickle.dump(clientes, clientesArquivo)
+clientesArquivo.close()
+
+funcionariosArquivo = open("funcionarios.dat", "wb")
+pickle.dump(funcionarios, funcionariosArquivo)
+funcionariosArquivo.close()
+
+locacoesArquivo = open("locacoes.dat", "wb")
+pickle.dump(locacoes, locacoesArquivo)
+locacoesArquivo.close()
