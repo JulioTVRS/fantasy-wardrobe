@@ -42,24 +42,36 @@ locacoes = {
     }
 }
 
-if os.path.exists("roupas.dat"):
+try:
     roupasArquivo = open("roupas.dat", "rb")
     roupas = pickle.load(roupasArquivo)
     roupasArquivo.close()
+except:
+    roupasArquivo = open("roupas.dat", "wb")
+    roupasArquivo.close()
     
-if os.path.exists("clientes.dat"):
+try:
     clientesArquivo = open("clientes.dat", "rb")
     clientes = pickle.load(clientesArquivo)
     clientesArquivo.close()
+except:
+    clientesArquivo = open("clientes.dat", "wb")
+    clientesArquivo.close()
 
-if os.path.exists("funcionarios.dat"):
+try:
     funcionariosArquivo = open("funcionarios.dat", "rb")
     funcionarios = pickle.load(funcionariosArquivo)
     funcionariosArquivo.close()
+except:
+    funcionariosArquivo = open("funcionarios.dat", "wb")
+    funcionariosArquivo.close()
     
-if os.path.exists("locacoes.dat"):
+try:
     locacoesArquivo = open("locacoes.dat", "rb")
     locacoes = pickle.load(locacoesArquivo)
+    locacoesArquivo.close()
+except:
+    locacoesArquivo = open("locacoes.dat", "wb")
     locacoesArquivo.close()
 
 resp = ""
