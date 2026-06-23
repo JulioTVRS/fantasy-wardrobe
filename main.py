@@ -48,7 +48,11 @@ def ler_categoria():
     while categoria != "1" and categoria != "2":
         print("Categoria inválida. Tente novamente! Categorias válidas: Comum (1), Fantasia (2)")
         categoria = input("Digite o número da categoria do produto: ")
-    return "Comum" if categoria == "1" else "Fantasia"
+
+    if categoria == "1":
+        return "Comum"
+    else:
+        return "Fantasia"
 
 
 def ler_id_existente(mensagem, dicionario, mensagem_erro):
@@ -61,82 +65,96 @@ def ler_id_existente(mensagem, dicionario, mensagem_erro):
 
 # Dicionários já com dados para acelerar os testes
 
-roupas = {              
-    1: {
-        "Nome": "Terno",
-        "Valor": 80,
-        "Descricao": "Terno preto com gravata.",
-        "Tamanho": "G",
-        "Categoria": "Comum",
-        "Ativo": True
-    }
-}
+def recuperar_roupas():
+    try:
+        roupas = {}
+        roupasArquivo = open("roupas.dat", "rb")
+        roupas = pickle.load(roupasArquivo)
+        roupasArquivo.close()
+    except:
+        roupas = {              
+            1: {
+                "Nome": "Terno",
+                "Valor": 80,
+                "Descricao": "Terno preto com gravata.",
+                "Tamanho": "G",
+                "Categoria": "Comum",
+                "Ativo": True
+            }
+        }
+        roupasArquivo = open("roupas.dat", "wb")
+        pickle.dump(roupas, roupasArquivo)
+        roupasArquivo.close()
 
-clientes = {
-    1: {
-        "Nome": "Fulano de Tal",
-        "CPF": "12345678900",
-        "Telefone": "(84) 12345-6789",
-        "Email": "fulano5@gmail.com",
-        "Endereco": "Rua das Palmeiras, 245, Lagoa Nova, Natal - RN, CEP 59075-320",
-        "Ativo": True
-    }
-}
+    return roupas
 
-funcionarios = {
-    1: {
-        "Nome": "Beltrano da Silva",
-        "CPF": "98765432100",
-        "Telefone": "(84) 54321-6789",
-        "Email": "beltrano1@gmail.com",
-        "Endereco": "Rua das Palmeiras, 246, Lagoa Nova, Natal - RN, CEP 59075-320",
-        "Ativo": True
-    }
-}
+def recuperar_clientes():
+    try:
+        clientesArquivo = open("clientes.dat", "rb")
+        clientes = pickle.load(clientesArquivo)
+        clientesArquivo.close()
+    except:
+        clientes = {
+            1: {
+                "Nome": "Fulano de Tal",
+                "CPF": "12345678900",
+                "Telefone": "(84) 12345-6789",
+                "Email": "fulano5@gmail.com",
+                "Endereco": "Rua das Palmeiras, 245, Lagoa Nova, Natal - RN, CEP 59075-320",
+                "Ativo": True
+            }
+        }
+        clientesArquivo = open("clientes.dat", "wb")
+        pickle.dump(clientes, clientesArquivo)
+        clientesArquivo.close()
+    return clientes
 
-locacoes = {
-    1: {
-        "ID_Cliente": 1,
-        "ID_Produto": 1,
-        "CheckIn": "25/05/2026",
-        "CheckOut": "30/06/2026",
-        "Ativo": True
-    }
-}
+def recuperar_funcionarios():
+    try:
+        funcionariosArquivo = open("funcionarios.dat", "rb")
+        funcionarios = pickle.load(funcionariosArquivo)
+        funcionariosArquivo.close()
+    except:
+        funcionarios = {
+            1: {
+                "Nome": "Beltrano da Silva",
+                "CPF": "98765432100",
+                "Telefone": "(84) 54321-6789",
+                "Email": "beltrano1@gmail.com",
+                "Endereco": "Rua das Palmeiras, 246, Lagoa Nova, Natal - RN, CEP 59075-320",
+                "Ativo": True
+            }
+        }
+        funcionariosArquivo = open("funcionarios.dat", "wb")
+        pickle.dump(funcionarios, funcionariosArquivo)
+        funcionariosArquivo.close()
+    return funcionarios
 
+def recuperar_locacoes():
+    try:
+        locacoesArquivo = open("locacoes.dat", "rb")
+        locacoes = pickle.load(locacoesArquivo)
+        locacoesArquivo.close()
+    except:
+        locacoes = {
+            1: {
+                "ID_Cliente": 1,
+                "ID_Produto": 1,
+                "CheckIn": "25/05/2026",
+                "CheckOut": "30/06/2026",
+                "Ativo": True
+            }
+        }
+        locacoesArquivo = open("locacoes.dat", "wb")
+        pickle.dump(locacoes, locacoesArquivo)
+        locacoesArquivo.close()
+    return locacoes
 
+roupas = recuperar_roupas()
+clientes = recuperar_clientes()
+funcionarios = recuperar_funcionarios()
+locacoes = recuperar_locacoes
 
-try:
-    roupasArquivo = open("roupas.dat", "rb")
-    roupas = pickle.load(roupasArquivo)
-    roupasArquivo.close()
-except:
-    roupasArquivo = open("roupas.dat", "wb")
-    roupasArquivo.close()
-    
-try:
-    clientesArquivo = open("clientes.dat", "rb")
-    clientes = pickle.load(clientesArquivo)
-    clientesArquivo.close()
-except:
-    clientesArquivo = open("clientes.dat", "wb")
-    clientesArquivo.close()
-
-try:
-    funcionariosArquivo = open("funcionarios.dat", "rb")
-    funcionarios = pickle.load(funcionariosArquivo)
-    funcionariosArquivo.close()
-except:
-    funcionariosArquivo = open("funcionarios.dat", "wb")
-    funcionariosArquivo.close()
-    
-try:
-    locacoesArquivo = open("locacoes.dat", "rb")
-    locacoes = pickle.load(locacoesArquivo)
-    locacoesArquivo.close()
-except:
-    locacoesArquivo = open("locacoes.dat", "wb")
-    locacoesArquivo.close()
 
 resp = ""
 while resp != "0":
