@@ -1,4 +1,46 @@
 import os
+import pickle
+from arquivos import recuperar_roupas, gravar_roupas
+
+from utils import ler_id
+
+def ler_valor():
+    while True:
+        try:
+            valor = float(input("Digite o valor do produto: "))
+        except ValueError:
+            print("Erro: Digite um número válido.")
+            continue
+
+        if valor < 0:
+            print("Erro: O valor do produto não pode ser negativo.")
+            continue
+
+        return valor
+
+
+def ler_tamanho():
+    print("Padrão de tamanhos: (PP, P, M, G, GG, XG)")
+    tamanho = input("Digite o tamanho do produto: ")
+    while tamanho.lower() not in ["pp", "p", "m", "g", "gg", "xg"]:
+        print("Tamanho inválido. Tente novamente! Tamanhos válidos: (PP, P, M, G, GG, XG)")
+        tamanho = input("Digite o tamanho do produto: ")
+    return tamanho.upper()
+
+
+def ler_categoria():
+    print("Categorias válidas: Comum (1), Fantasia (2)")
+    categoria = input("Digite o número da categoria do produto: ")
+    while categoria != "1" and categoria != "2":
+        print("Categoria inválida. Tente novamente! Categorias válidas: Comum (1), Fantasia (2)")
+        categoria = input("Digite o número da categoria do produto: ")
+
+    if categoria == "1":
+        return "Comum"
+    else:
+        return "Fantasia"
+
+roupas = recuperar_roupas()
 
 def ModuloRoupas():
         resp_roupas = ""
@@ -85,6 +127,8 @@ def ModuloRoupas():
                     "Ativo": True
                 }
 
+                gravar_roupas(roupas)
+
                 print("(ID: %d) Produto adicionado com sucesso!" % id_produto)
                 print()
                 input("Aperte (ENTER) para retornar.")
@@ -118,6 +162,7 @@ def ModuloRoupas():
 
                         if decisao.lower() == "s":
                             roupas[id_produto]["Ativo"] = False
+                            gravar_roupas(roupas)
                             print("Produto removido com sucesso!")
                     else:
                         print("Não existe um produto com esse ID.")
@@ -168,7 +213,8 @@ def ModuloRoupas():
                                 "Categoria": ctg_produto,
                                 "Ativo": True
                             }
-
+                            
+                            gravar_roupas(roupas)
                             print("Produto atualizado com sucesso!")
                             
                             print()
