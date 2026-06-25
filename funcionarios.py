@@ -8,13 +8,13 @@ def ModuloFuncionarios():
     resp_funcionarios = ""
     while resp_funcionarios != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        menu("Módulo de Funcionários", [
+        print(menu("Módulo de Funcionários", [
             "1 - Listar funcionário",
             "2 - Adicionar funcionário",
             "3 - Remover funcionário",
             "4 - Atualizar funcionário",
             "0 - Voltar"
-        ])
+        ]))
 
         resp_funcionarios = input("Digite o número do submódulo que quer acessar: ")
 

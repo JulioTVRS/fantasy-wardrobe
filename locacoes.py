@@ -1,4 +1,5 @@
 import os
+from datetime import date, datetime
 from arquivos import recuperar_locacoes, recuperar_roupas, recuperar_clientes, gravar_locacoes
 from utils import ler_id, menu, submenu
 
@@ -9,6 +10,26 @@ def ler_id_existente(mensagem, dicionario, mensagem_erro):
         valor = ler_id(mensagem)
     return valor
 
+def ler_data(mensagem, mensagem_erro):
+    data = input(mensagem)
+    verificado = False
+    
+    while not verificado:
+        try:
+            datamodelo = datetime.strptime(data, "%d/%m/%Y").date()
+            
+            if datamodelo >= date.today():
+                verificado = True
+            else:
+                print(mensagem_erro)
+                data = input(mensagem)
+                
+        except ValueError:
+            print(mensagem_erro)
+            data = input(mensagem)
+            
+    return data
+    
 
 def ModuloLocacoes():
     locacoes = recuperar_locacoes()
@@ -18,13 +39,13 @@ def ModuloLocacoes():
     resp_locacoes = ""
     while resp_locacoes != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        menu("Módulo de Funcionários", [
+        print(menu("Módulo de Funcionários", [
             "1 - Listar locações",
             "2 - Adicionar locação",
             "3 - Remover locação",
             "4 - Atualizar locação",
             "0 - Voltar"
-        ])
+        ]))
 
         resp_locacoes = input("Digite o número do submódulo que quer acessar: ")
 
@@ -76,10 +97,11 @@ def ModuloLocacoes():
             id_cliente_loc = ler_id_existente("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
             id_produto_loc = ler_id_existente("Digite o ID do produto: ", roupas, "Não existe um produto com esse ID.")
 
-            print("Formato de data: DD/MM/AAAA")
-            checkin_loc = input("Digite a data de Check-in: ")
+            checkin_loc = str(date.today().day) + "/" + str(date.today().month) + "/" + str(date.today().year)
 
-            checkout_loc = input("Digite a data de Check-out: ")
+            print("Formato de data: DD/MM/AAAA")
+
+            checkout_loc = ler_data("Digite a data de Check-out: ", "Data inválida, tente novamente!")
 
             id_locacao = 1
             if len(locacoes) > 0:
@@ -207,7 +229,7 @@ def ModuloLocacoes():
                             nome_produto_loc = roupas[locacoes[id_locacao]["ID_Produto"]]["Nome"]
                         else:
                             nome_produto_loc = "Produto não encontrado"
-                        
+
                         print()
                         print("Informações novas:")
                         print(f"Locação > ID: {id_locacao} | Cliente: {nome_cliente_loc} (ID: {locacoes[id_locacao]['ID_Cliente']}) | Produto: {nome_produto_loc} (ID: {locacoes[id_locacao]['ID_Produto']})")

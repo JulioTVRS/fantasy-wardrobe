@@ -9,25 +9,30 @@ def ler_id(mensagem):
 def menu(titulo, opcoes):
     borda = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
 
-    print(borda)
-    print("|" + " " * 35 + "|")
-    print("|" + titulo.center(35) + "|")
-    print("|" + " " * 35 + "|")
-    print(borda)
+    menu = borda + "\n"
+    menu += "|" + " " * 35 + "|\n"
+    menu += "|" + titulo.center(35) + "|\n"
+    menu += "|" + " " * 35 + "|\n"
+    menu += borda + "\n"
 
     for opcao in opcoes:
-        print(f"| {opcao:<33} |")
+        menu += f"| {opcao:<33} |\n"
+    menu += borda
 
-    print(borda)
+    return menu
+
+    
     
 def submenu(titulo):
     borda = "-------------------------------------"
 
-    print(borda)
-    print("|" + " " * 35 + "|")
-    print("|" + titulo.center(35) + "|")
-    print("|" + " " * 35 + "|")
-    print(borda)
+    menu = borda + "\n"
+    menu += "|" + " " * 35 + "|\n"
+    menu += "|" + titulo.center(35) + "|\n"
+    menu += "|" + " " * 35 + "|\n"
+    menu += borda
+
+    return menu
 
 
 def ler_cpf():

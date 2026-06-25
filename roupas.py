@@ -46,13 +46,13 @@ def ModuloRoupas():
         resp_roupas = ""
         while resp_roupas != "0":
             os.system("cls" if os.name == "nt" else "clear")
-            menu("Módulo de Roupas e Fantasias", [
+            print(menu("Módulo de Roupas e Fantasias", [
                 "1 - Listar produto",
                 "2 - Adicionar produto",
                 "3 - Remover produto",
                 "4 - Atualizar produto",
                 "0 - Voltar"
-            ])
+            ]))
 
             resp_roupas = input("Digite o número do submódulo que quer acessar: ")
 

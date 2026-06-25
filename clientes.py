@@ -8,13 +8,13 @@ def ModuloClientes():
     resp_clientes = ""
     while resp_clientes != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        menu("Módulo de Clientes", [
+        print(menu("Módulo de Clientes", [
             "1 - Listar clientes",
             "2 - Adicionar cliente",
             "3 - Remover cliente",
             "4 - Atualizar cliente",
             "0 - Voltar"
-        ])
+        ]))
 
         resp_clientes = input("Digite o número do submódulo que quer acessar: ")
 

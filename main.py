@@ -16,7 +16,7 @@ while resp != "0":
     locacoes = recuperar_locacoes()
     
     os.system("cls" if os.name == "nt" else "clear")
-    menu("Fantasy Wardrobe", [
+    print(menu("Fantasy Wardrobe", [
         "1 - Roupas e Fantasias",
         "2 - Clientes",
         "3 - Funcionários",
@@ -24,7 +24,7 @@ while resp != "0":
         "5 - Relatórios",
         "6 - Sobre o Sistema",
         "0 - Sair"
-    ])
+    ]))
 
     resp = input("Digite o número do módulo que quer acessar: ")
 
