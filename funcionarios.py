@@ -144,7 +144,7 @@ def ModuloFuncionarios():
                         print("Modelo de telefone: (00) 00000-0000")
                         tel_funcionario = input("Digite o telefone do funcionário: ")
 
-                        email_funcionario = input("Digite o e-mail do funcionário: ")
+                        email_funcionario = ler_email("Digite o e-mail do funcionário: ", "E-mail inválido, tente novamente!")
 
                         endereco_funcionario = input("Digite o endereço do funcionário: ")
 

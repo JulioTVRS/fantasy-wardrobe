@@ -144,7 +144,7 @@ def ModuloClientes():
                         print("Modelo de telefone: (00) 00000-0000")
                         tel_cliente = input("Digite o telefone do cliente: ")
 
-                        email_cliente = input("Digite o e-mail do cliente: ")
+                        email_cliente = ler_email("Digite o e-mail do cliente: ", "E-mail inválido, tente novamente!")
 
                         endereco_cliente = input("Digite o endereço do cliente: ")
 
