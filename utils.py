@@ -21,8 +21,6 @@ def menu(titulo, opcoes):
 
     return menu
 
-    
-    
 def submenu(titulo):
     borda = "-------------------------------------"
 
@@ -33,6 +31,12 @@ def submenu(titulo):
     menu += borda
 
     return menu
+
+def mostrar_menu(titulo, opcoes):
+    print(menu(titulo, opcoes))
+
+def mostrar_submenu(titulo):
+    print(submenu(titulo))
 
 
 def ler_cpf():
@@ -68,3 +72,24 @@ def ler_cpf():
             validado = True
     
     return cpf
+
+def ler_email(mensagem, mensagem_erro):
+    validado = False
+    while not validado:
+        email = input(mensagem)
+        if email.count("@") == 1:
+            email_separado = email.split("@")
+
+            if len(email_separado) != 2 or email_separado[0].strip() == "":
+                print(mensagem_erro)
+                continue
+
+            dominio = email_separado[1]
+            if not "." in dominio or dominio.endswith(".") or dominio.startswith("."):
+                print(mensagem_erro)
+            else:
+                validado = True
+        else:
+            print(mensagem_erro)
+
+    return email.strip()

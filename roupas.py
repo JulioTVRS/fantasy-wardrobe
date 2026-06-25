@@ -2,7 +2,7 @@ import os
 import pickle
 from arquivos import recuperar_roupas, gravar_roupas
 
-from utils import ler_id, menu, submenu
+from utils import ler_id, mostrar_menu, mostrar_submenu
 
 def ler_valor():
     while True:
@@ -46,19 +46,19 @@ def ModuloRoupas():
         resp_roupas = ""
         while resp_roupas != "0":
             os.system("cls" if os.name == "nt" else "clear")
-            print(menu("Módulo de Roupas e Fantasias", [
+            mostrar_menu("Módulo de Roupas e Fantasias", [
                 "1 - Listar produto",
                 "2 - Adicionar produto",
                 "3 - Remover produto",
                 "4 - Atualizar produto",
                 "0 - Voltar"
-            ]))
+            ])
 
             resp_roupas = input("Digite o número do submódulo que quer acessar: ")
 
             if resp_roupas == "1":
                 os.system("cls" if os.name == "nt" else "clear")
-                submenu("Visualizar produto")
+                mostrar_submenu("Visualizar produto")
                 
                 if len(roupas) > 0:
                     id_produto = ""
@@ -89,7 +89,7 @@ def ModuloRoupas():
 
             elif resp_roupas == "2":
                 os.system("cls" if os.name == "nt" else "clear")
-                submenu("Adicionar produto")
+                mostrar_submenu("Adicionar produto")
 
                 nome_produto = input("Digite o nome do produto: ")
                 valor_produto = ler_valor()
@@ -119,7 +119,7 @@ def ModuloRoupas():
 
             elif resp_roupas == "3":
                 os.system("cls" if os.name == "nt" else "clear")
-                submenu("Remover produto")
+                mostrar_submenu("Remover produto")
 
                 id_produto = ""
                 encontrado = False
@@ -150,7 +150,7 @@ def ModuloRoupas():
 
             elif resp_roupas == "4":
                 os.system("cls" if os.name == "nt" else "clear")
-                submenu("Atualizar produto")
+                mostrar_submenu("Atualizar produto")
 
                 id_produto = ""
                 encontrado = False

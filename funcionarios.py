@@ -1,6 +1,6 @@
 import os
 from arquivos import recuperar_funcionarios, gravar_funcionarios
-from utils import ler_id, ler_cpf, menu, submenu
+from utils import ler_id, ler_cpf, mostrar_menu, mostrar_submenu, ler_email
 
 def ModuloFuncionarios():
     funcionarios = recuperar_funcionarios()
@@ -8,19 +8,19 @@ def ModuloFuncionarios():
     resp_funcionarios = ""
     while resp_funcionarios != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        print(menu("Módulo de Funcionários", [
+        mostrar_menu("Módulo de Funcionários", [
             "1 - Listar funcionário",
             "2 - Adicionar funcionário",
             "3 - Remover funcionário",
             "4 - Atualizar funcionário",
             "0 - Voltar"
-        ]))
+        ])
 
         resp_funcionarios = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_funcionarios == "1":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Visualizar funcionário")
+            mostrar_submenu("Visualizar funcionário")
 
             if len(funcionarios) > 0:
                 id_funcionario = ""
@@ -51,7 +51,7 @@ def ModuloFuncionarios():
 
         elif resp_funcionarios == "2":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Adicionar funcionário")
+            mostrar_submenu("Adicionar funcionário")
 
             nome_funcionario = input("Digite o nome do funcionário: ")
             cpf_funcionario = ler_cpf()
@@ -59,7 +59,7 @@ def ModuloFuncionarios():
             print("Modelo de telefone: (00) 00000-0000")
             tel_funcionario = input("Digite o telefone do funcionário: ")
 
-            email_funcionario = input("Digite o e-mail do funcionário: ")
+            email_funcionario = ler_email("Digite o e-mail do funcionário: ", "E-mail inválido, tente novamente!")
 
             endereco_funcionario = input("Digite o endereço do funcionário: ")
 
@@ -85,7 +85,7 @@ def ModuloFuncionarios():
 
         elif resp_funcionarios == "3":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Remover funcionário")
+            mostrar_submenu("Remover funcionário")
 
             id_funcionario = ""
             encontrado = False
@@ -119,7 +119,7 @@ def ModuloFuncionarios():
 
         elif resp_funcionarios == "4":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Atualizar funcionário")
+            mostrar_submenu("Atualizar funcionário")
 
             id_funcionario = ""
             encontrado = False

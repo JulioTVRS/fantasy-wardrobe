@@ -1,6 +1,6 @@
 import os
 from arquivos import recuperar_clientes, gravar_clientes
-from utils import ler_id, ler_cpf, menu, submenu
+from utils import ler_id, ler_cpf, ler_email, mostrar_menu, mostrar_submenu
 
 def ModuloClientes():
     clientes = recuperar_clientes()
@@ -8,19 +8,19 @@ def ModuloClientes():
     resp_clientes = ""
     while resp_clientes != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        print(menu("Módulo de Clientes", [
+        mostrar_menu("Módulo de Clientes", [
             "1 - Listar clientes",
             "2 - Adicionar cliente",
             "3 - Remover cliente",
             "4 - Atualizar cliente",
             "0 - Voltar"
-        ]))
+        ])
 
         resp_clientes = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_clientes == "1":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Visualizar cliente")
+            mostrar_submenu("Visualizar cliente")
 
             if len(clientes) > 0:
                 id_cliente = ""
@@ -51,7 +51,7 @@ def ModuloClientes():
 
         elif resp_clientes == "2":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Adicionar cliente")
+            mostrar_submenu("Adicionar cliente")
 
             nome_cliente = input("Digite o nome do cliente: ")
             cpf_cliente = ler_cpf()
@@ -59,7 +59,7 @@ def ModuloClientes():
             print("Modelo de telefone: (00) 00000-0000")
             tel_cliente = input("Digite o telefone do cliente: ")
 
-            email_cliente = input("Digite o e-mail do cliente: ")
+            email_cliente = ler_email("Digite o e-mail do cliente: ", "E-mail inválido, tente novamente!")
 
             endereco_cliente = input("Digite o endereço do cliente: ")
 
@@ -85,7 +85,7 @@ def ModuloClientes():
 
         elif resp_clientes == "3":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Remover cliente")
+            mostrar_submenu("Remover cliente")
 
             id_cliente = ""
             encontrado = False
@@ -119,7 +119,7 @@ def ModuloClientes():
 
         elif resp_clientes == "4":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Atualizar cliente")
+            mostrar_submenu("Atualizar cliente")
 
             id_cliente = ""
             encontrado = False

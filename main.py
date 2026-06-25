@@ -1,7 +1,7 @@
 import os
 import pickle
 
-from utils import menu
+from utils import mostrar_menu
 from arquivos import recuperar_clientes, recuperar_funcionarios, recuperar_locacoes, recuperar_roupas, gravar_roupas, gravar_clientes, gravar_funcionarios, gravar_locacoes
 from roupas import ModuloRoupas
 from clientes import ModuloClientes
@@ -16,7 +16,7 @@ while resp != "0":
     locacoes = recuperar_locacoes()
     
     os.system("cls" if os.name == "nt" else "clear")
-    print(menu("Fantasy Wardrobe", [
+    mostrar_menu("Fantasy Wardrobe", [
         "1 - Roupas e Fantasias",
         "2 - Clientes",
         "3 - Funcionários",
@@ -24,7 +24,7 @@ while resp != "0":
         "5 - Relatórios",
         "6 - Sobre o Sistema",
         "0 - Sair"
-    ]))
+    ])
 
     resp = input("Digite o número do módulo que quer acessar: ")
 

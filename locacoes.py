@@ -1,7 +1,7 @@
 import os
 from datetime import date, datetime
 from arquivos import recuperar_locacoes, recuperar_roupas, recuperar_clientes, gravar_locacoes
-from utils import ler_id, menu, submenu
+from utils import ler_id, mostrar_menu, mostrar_submenu
 
 def ler_id_existente(mensagem, dicionario, mensagem_erro):
     valor = ler_id(mensagem)
@@ -39,19 +39,19 @@ def ModuloLocacoes():
     resp_locacoes = ""
     while resp_locacoes != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        print(menu("Módulo de Funcionários", [
+        mostrar_menu("Módulo de Funcionários", [
             "1 - Listar locações",
             "2 - Adicionar locação",
             "3 - Remover locação",
             "4 - Atualizar locação",
             "0 - Voltar"
-        ]))
+        ])
 
         resp_locacoes = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_locacoes == "1":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Visualizar locação")
+            mostrar_submenu("Visualizar locação")
 
             if len(locacoes) > 0:
                 id_locacao = ""
@@ -92,7 +92,7 @@ def ModuloLocacoes():
 
         elif resp_locacoes == "2":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Adicionar locação")
+            mostrar_submenu("Adicionar locação")
 
             id_cliente_loc = ler_id_existente("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
             id_produto_loc = ler_id_existente("Digite o ID do produto: ", roupas, "Não existe um produto com esse ID.")
@@ -124,7 +124,7 @@ def ModuloLocacoes():
 
         elif resp_locacoes == "3":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Remover locação")
+            mostrar_submenu("Remover locação")
 
             id_locacao = ""
             encontrado = False
@@ -169,7 +169,7 @@ def ModuloLocacoes():
 
         elif resp_locacoes == "4":
             os.system("cls" if os.name == "nt" else "clear")
-            submenu("Atualizar locação")
+            mostrar_submenu("Atualizar locação")
 
             id_locacao = ""
             encontrado = False
