@@ -1,41 +1,31 @@
 import os
 from arquivos import recuperar_funcionarios, gravar_funcionarios
-from utils import ler_id, ler_cpf
-
-funcionarios = recuperar_funcionarios()
+from utils import ler_id, ler_cpf, menu, submenu
 
 def ModuloFuncionarios():
+    funcionarios = recuperar_funcionarios()
+    
     resp_funcionarios = ""
     while resp_funcionarios != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-        print("|-                               -|")
-        print("|-     Módulo de Funcionários    -|")
-        print("|-                               -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-        print("|-  1 - Listar funcionários      -|")
-        print("|-  2 - Adicionar funcionário    -|")
-        print("|-  3 - Remover funcionário      -|")
-        print("|-  4 - Atualizar funcionário    -|")
-        print("|-  0 - Voltar                   -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+        menu("Módulo de Funcionários", [
+            "1 - Listar funcionário",
+            "2 - Adicionar funcionário",
+            "3 - Remover funcionário",
+            "4 - Atualizar funcionário",
+            "0 - Voltar"
+        ])
 
         resp_funcionarios = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_funcionarios == "1":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-      Visualizar funcionário   -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Visualizar funcionário")
 
             if len(funcionarios) > 0:
                 id_funcionario = ""
                 while id_funcionario != 0:
-                    id_funcionario = ler_id("Digite o ID do funcionário (ou 0 para cancelar): ")
+                    id_funcionario = ler_id("Digite o ID do funcionário (ou 0 para voltar): ")
 
                     if id_funcionario != 0:
                         if id_funcionario in funcionarios:
@@ -61,13 +51,7 @@ def ModuloFuncionarios():
 
         elif resp_funcionarios == "2":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-      Adicionar funcionário    -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Adicionar funcionário")
 
             nome_funcionario = input("Digite o nome do funcionário: ")
             cpf_funcionario = ler_cpf()
@@ -101,18 +85,12 @@ def ModuloFuncionarios():
 
         elif resp_funcionarios == "3":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-       Remover funcionário     -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Remover funcionário")
 
             id_funcionario = ""
             encontrado = False
             while not encontrado:
-                id_funcionario = ler_id("Digite o ID do funcionário (ou 0 para cancelar): ")
+                id_funcionario = ler_id("Digite o ID do funcionário (ou 0 para voltar): ")
 
                 if id_funcionario == 0:
                     encontrado = True
@@ -141,18 +119,12 @@ def ModuloFuncionarios():
 
         elif resp_funcionarios == "4":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-      Atualizar funcionário    -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Atualizar funcionário")
 
             id_funcionario = ""
             encontrado = False
             while not encontrado:
-                id_funcionario = ler_id("Digite o ID do funcionário (ou 0 para cancelar): ")
+                id_funcionario = ler_id("Digite o ID do funcionário (ou 0 para voltar): ")
 
                 if id_funcionario == 0:
                     encontrado = True

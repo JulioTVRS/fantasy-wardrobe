@@ -1,41 +1,31 @@
 import os
 from arquivos import recuperar_clientes, gravar_clientes
-from utils import ler_id, ler_cpf
-
-clientes = recuperar_clientes()
+from utils import ler_id, ler_cpf, menu, submenu
 
 def ModuloClientes():
+    clientes = recuperar_clientes()
+    
     resp_clientes = ""
     while resp_clientes != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-        print("|-                               -|")
-        print("|-       Módulo de Clientes      -|")
-        print("|-                               -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-        print("|-  1 - Listar clientes          -|")
-        print("|-  2 - Adicionar cliente        -|")
-        print("|-  3 - Remover cliente          -|")
-        print("|-  4 - Atualizar cliente        -|")
-        print("|-  0 - Voltar                   -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+        menu("Módulo de Clientes", [
+            "1 - Listar clientes",
+            "2 - Adicionar cliente",
+            "3 - Remover cliente",
+            "4 - Atualizar cliente",
+            "0 - Voltar"
+        ])
 
         resp_clientes = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_clientes == "1":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-      Visualizar cliente        -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Visualizar cliente")
 
             if len(clientes) > 0:
                 id_cliente = ""
                 while id_cliente != 0:
-                    id_cliente = ler_id("Digite o ID do cliente (ou 0 para cancelar): ")
+                    id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
 
                     if id_cliente != 0:
                         if id_cliente in clientes:
@@ -61,13 +51,7 @@ def ModuloClientes():
 
         elif resp_clientes == "2":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-       Adicionar cliente       -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Adicionar cliente")
 
             nome_cliente = input("Digite o nome do cliente: ")
             cpf_cliente = ler_cpf()
@@ -101,18 +85,12 @@ def ModuloClientes():
 
         elif resp_clientes == "3":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-        Remover cliente        -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Remover cliente")
 
             id_cliente = ""
             encontrado = False
             while not encontrado:
-                id_cliente = ler_id("Digite o ID do cliente (ou 0 para cancelar): ")
+                id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
 
                 if id_cliente == 0:
                     encontrado = True
@@ -141,18 +119,12 @@ def ModuloClientes():
 
         elif resp_clientes == "4":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-       Atualizar cliente       -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Atualizar cliente")
 
             id_cliente = ""
             encontrado = False
             while not encontrado:
-                id_cliente = ler_id("Digite o ID do cliente (ou 0 para cancelar): ")
+                id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
 
                 if id_cliente == 0:
                     encontrado = True

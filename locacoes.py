@@ -1,11 +1,6 @@
 import os
 from arquivos import recuperar_locacoes, recuperar_roupas, recuperar_clientes, gravar_locacoes
-from utils import ler_id
-
-locacoes = recuperar_locacoes()
-roupas = recuperar_roupas()
-clientes = recuperar_clientes()
-
+from utils import ler_id, menu, submenu
 
 def ler_id_existente(mensagem, dicionario, mensagem_erro):
     valor = ler_id(mensagem)
@@ -16,37 +11,31 @@ def ler_id_existente(mensagem, dicionario, mensagem_erro):
 
 
 def ModuloLocacoes():
+    locacoes = recuperar_locacoes()
+    roupas = recuperar_roupas()
+    clientes = recuperar_clientes()
+    
     resp_locacoes = ""
     while resp_locacoes != "0":
         os.system("cls" if os.name == "nt" else "clear")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-        print("|-                                   -|")
-        print("|-         Módulo de Locações        -|")
-        print("|-                                   -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-        print("|-  1 - Listar locações              -|")
-        print("|-  2 - Adicionar locação            -|")
-        print("|-  3 - Remover locação              -|")
-        print("|-  4 - Atualizar locação            -|")
-        print("|-  0 - Voltar                       -|")
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+        menu("Módulo de Funcionários", [
+            "1 - Listar locações",
+            "2 - Adicionar locação",
+            "3 - Remover locação",
+            "4 - Atualizar locação",
+            "0 - Voltar"
+        ])
 
         resp_locacoes = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_locacoes == "1":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                                   -|")
-            print("|-        Visualizar locação         -|")
-            print("|-                                   -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Visualizar locação")
 
             if len(locacoes) > 0:
                 id_locacao = ""
                 while id_locacao != 0:
-                    id_locacao = ler_id("Digite o ID da locação (ou 0 para cancelar): ")
+                    id_locacao = ler_id("Digite o ID da locação (ou 0 para voltar): ")
 
                     if id_locacao != 0:
                         if id_locacao in locacoes:
@@ -82,13 +71,7 @@ def ModuloLocacoes():
 
         elif resp_locacoes == "2":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                                   -|")
-            print("|-         Adicionar locação         -|")
-            print("|-                                   -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Adicionar locação")
 
             id_cliente_loc = ler_id_existente("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
             id_produto_loc = ler_id_existente("Digite o ID do produto: ", roupas, "Não existe um produto com esse ID.")
@@ -119,18 +102,12 @@ def ModuloLocacoes():
 
         elif resp_locacoes == "3":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                                   -|")
-            print("|-          Remover locação          -|")
-            print("|-                                   -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Remover locação")
 
             id_locacao = ""
             encontrado = False
             while not encontrado:
-                id_locacao = ler_id("Digite o ID da locação (ou 0 para cancelar): ")
+                id_locacao = ler_id("Digite o ID da locação (ou 0 para voltar): ")
 
                 if id_locacao == 0:
                     encontrado = True
@@ -170,18 +147,12 @@ def ModuloLocacoes():
 
         elif resp_locacoes == "4":
             os.system("cls" if os.name == "nt" else "clear")
-            print()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                                   -|")
-            print("|-         Atualizar locação         -|")
-            print("|-                                   -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
+            submenu("Atualizar locação")
 
             id_locacao = ""
             encontrado = False
             while not encontrado:
-                id_locacao = ler_id("Digite o ID da locação (ou 0 para cancelar): ")
+                id_locacao = ler_id("Digite o ID da locação (ou 0 para voltar): ")
 
                 if id_locacao == 0:
                     encontrado = True

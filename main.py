@@ -1,34 +1,30 @@
 import os
 import pickle
 
-from arquivos import recuperar_clientes, recuperar_funcionarios, recuperar_locacoes, recuperar_roupas
+from utils import menu
+from arquivos import recuperar_clientes, recuperar_funcionarios, recuperar_locacoes, recuperar_roupas, gravar_roupas, gravar_clientes, gravar_funcionarios, gravar_locacoes
 from roupas import ModuloRoupas
 from clientes import ModuloClientes
 from funcionarios import ModuloFuncionarios
 from locacoes import ModuloLocacoes
 
-funcionarios = recuperar_funcionarios()
-roupas = recuperar_roupas()
-clientes = recuperar_clientes()
-locacoes = recuperar_locacoes()
-
-
 resp = ""
 while resp != "0":
+    funcionarios = recuperar_funcionarios()
+    roupas = recuperar_roupas()
+    clientes = recuperar_clientes()
+    locacoes = recuperar_locacoes()
+    
     os.system("cls" if os.name == "nt" else "clear")
-    print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-    print("|-                                 -|")
-    print("|-         Fantasy Wardrobe        -|")
-    print("|-                                 -|")
-    print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-    print("|-   1 - Roupas e Fantasias        -|")
-    print("|-   2 - Clientes                  -|")
-    print("|-   3 - Funcionários              -|")
-    print("|-   4 - Gerenciar Locação         -|")
-    print("|-   5 - Relatórios                -|")
-    print("|-   6 - Sobre o Sistema           -|")
-    print("|-   0 - Sair                      -|")
-    print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+    menu("Fantasy Wardrobe", [
+        "1 - Roupas e Fantasias",
+        "2 - Clientes",
+        "3 - Funcionários",
+        "4 - Gerenciar Locação",
+        "5 - Relatórios",
+        "6 - Sobre o Sistema",
+        "0 - Sair"
+    ])
 
     resp = input("Digite o número do módulo que quer acessar: ")
 
@@ -73,21 +69,13 @@ while resp != "0":
         print()
         input("Aperte (ENTER) para retornar.")
         print()
+    else:
+        print()
+        print("Opção inválida!")
+        input("Aperte (ENTER) para retornar.")
         
 
-
-roupasArquivo = open("roupas.dat", "wb")
-pickle.dump(roupas, roupasArquivo)
-roupasArquivo.close()
-
-clientesArquivo = open("clientes.dat", "wb")
-pickle.dump(clientes, clientesArquivo)
-clientesArquivo.close()
-
-funcionariosArquivo = open("funcionarios.dat", "wb")
-pickle.dump(funcionarios, funcionariosArquivo)
-funcionariosArquivo.close()
-
-locacoesArquivo = open("locacoes.dat", "wb")
-pickle.dump(locacoes, locacoesArquivo)
-locacoesArquivo.close()
+gravar_roupas(roupas)
+gravar_clientes(clientes)
+gravar_funcionarios(funcionarios)
+gravar_locacoes(locacoes)

@@ -2,7 +2,7 @@ import os
 import pickle
 from arquivos import recuperar_roupas, gravar_roupas
 
-from utils import ler_id
+from utils import ler_id, menu, submenu
 
 def ler_valor():
     while True:
@@ -40,41 +40,30 @@ def ler_categoria():
     else:
         return "Fantasia"
 
-roupas = recuperar_roupas()
-
 def ModuloRoupas():
+        roupas = recuperar_roupas()
+    
         resp_roupas = ""
         while resp_roupas != "0":
             os.system("cls" if os.name == "nt" else "clear")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-        Módulo de Roupas       -|")
-            print("|-          e Fantasias          -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-  1 - Listar produto           -|")
-            print("|-  2 - Adicionar produto        -|")
-            print("|-  3 - Remover produto          -|")
-            print("|-  4 - Atualizar produto        -|")
-            print("|-  0 - Voltar                   -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+            menu("Módulo de Roupas e Fantasias", [
+                "1 - Listar produto",
+                "2 - Adicionar produto",
+                "3 - Remover produto",
+                "4 - Atualizar produto",
+                "0 - Voltar"
+            ])
 
             resp_roupas = input("Digite o número do submódulo que quer acessar: ")
 
             if resp_roupas == "1":
                 os.system("cls" if os.name == "nt" else "clear")
-                print()
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print("|-                               -|")
-                print("|-      Visualizar produto       -|")
-                print("|-                               -|")
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print()
+                submenu("Visualizar produto")
                 
                 if len(roupas) > 0:
                     id_produto = ""
                     while id_produto != 0:
-                        id_produto = ler_id("Digite o ID do produto (ou 0 para cancelar): ")
+                        id_produto = ler_id("Digite o ID do produto (ou 0 para voltar): ")
 
                         if id_produto != 0:
                             if id_produto in roupas:
@@ -100,13 +89,7 @@ def ModuloRoupas():
 
             elif resp_roupas == "2":
                 os.system("cls" if os.name == "nt" else "clear")
-                print()
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print("|-                               -|")
-                print("|-        Adicionar produto      -|")
-                print("|-                               -|")
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print()
+                submenu("Adicionar produto")
 
                 nome_produto = input("Digite o nome do produto: ")
                 valor_produto = ler_valor()
@@ -136,18 +119,12 @@ def ModuloRoupas():
 
             elif resp_roupas == "3":
                 os.system("cls" if os.name == "nt" else "clear")
-                print()
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print("|-                               -|")
-                print("|-        Remover produto        -|")
-                print("|-                               -|")
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print()
+                submenu("Remover produto")
 
                 id_produto = ""
                 encontrado = False
                 while not encontrado:
-                    id_produto = ler_id("Digite o ID do produto (ou 0 para cancelar): ")
+                    id_produto = ler_id("Digite o ID do produto (ou 0 para voltar): ")
 
                     if id_produto == 0:
                         encontrado = True
@@ -173,18 +150,12 @@ def ModuloRoupas():
 
             elif resp_roupas == "4":
                 os.system("cls" if os.name == "nt" else "clear")
-                print()
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print("|-                               -|")
-                print("|-        Atualizar produto      -|")
-                print("|-                               -|")
-                print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-                print()
+                submenu("Atualizar produto")
 
                 id_produto = ""
                 encontrado = False
                 while not encontrado:
-                    id_produto = ler_id("Digite o ID do produto (ou 0 para cancelar): ")
+                    id_produto = ler_id("Digite o ID do produto (ou 0 para voltar): ")
 
                     if id_produto == 0:
                         encontrado = True
