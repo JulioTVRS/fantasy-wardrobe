@@ -1,13 +1,13 @@
-import os
 from arquivos import recuperar_clientes, gravar_clientes
-from utils import ler_id, ler_cpf, ler_email, mostrar_menu, mostrar_submenu
+from utils import mostrar_menu, mostrar_submenu, limpar
+from validacao import ler_id, ler_cpf, ler_email
 
 def ModuloClientes():
     clientes = recuperar_clientes()
     
     resp_clientes = ""
     while resp_clientes != "0":
-        os.system("cls" if os.name == "nt" else "clear")
+        limpar()
         mostrar_menu("Módulo de Clientes", [
             "1 - Listar clientes",
             "2 - Adicionar cliente",
@@ -19,7 +19,7 @@ def ModuloClientes():
         resp_clientes = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_clientes == "1":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Visualizar cliente")
 
             if len(clientes) > 0:
@@ -50,7 +50,7 @@ def ModuloClientes():
             print()
 
         elif resp_clientes == "2":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Adicionar cliente")
 
             nome_cliente = input("Digite o nome do cliente: ")
@@ -84,7 +84,7 @@ def ModuloClientes():
             print()
 
         elif resp_clientes == "3":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Remover cliente")
 
             id_cliente = ""
@@ -118,7 +118,7 @@ def ModuloClientes():
             print()
 
         elif resp_clientes == "4":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Atualizar cliente")
 
             id_cliente = ""

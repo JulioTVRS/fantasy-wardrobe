@@ -1,13 +1,13 @@
-import os
 from arquivos import recuperar_funcionarios, gravar_funcionarios
-from utils import ler_id, ler_cpf, mostrar_menu, mostrar_submenu, ler_email
+from utils import mostrar_menu, mostrar_submenu, limpar
+from validacao import ler_email, ler_id, ler_cpf
 
 def ModuloFuncionarios():
     funcionarios = recuperar_funcionarios()
     
     resp_funcionarios = ""
     while resp_funcionarios != "0":
-        os.system("cls" if os.name == "nt" else "clear")
+        limpar()
         mostrar_menu("Módulo de Funcionários", [
             "1 - Listar funcionário",
             "2 - Adicionar funcionário",
@@ -19,7 +19,7 @@ def ModuloFuncionarios():
         resp_funcionarios = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_funcionarios == "1":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Visualizar funcionário")
 
             if len(funcionarios) > 0:
@@ -50,7 +50,7 @@ def ModuloFuncionarios():
             print()
 
         elif resp_funcionarios == "2":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Adicionar funcionário")
 
             nome_funcionario = input("Digite o nome do funcionário: ")
@@ -84,7 +84,7 @@ def ModuloFuncionarios():
             print()
 
         elif resp_funcionarios == "3":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Remover funcionário")
 
             id_funcionario = ""
@@ -118,7 +118,7 @@ def ModuloFuncionarios():
             print()
 
         elif resp_funcionarios == "4":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Atualizar funcionário")
 
             id_funcionario = ""

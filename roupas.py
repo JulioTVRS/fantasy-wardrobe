@@ -1,23 +1,20 @@
-import os
-import pickle
 from arquivos import recuperar_roupas, gravar_roupas
-
-from utils import ler_id, mostrar_menu, mostrar_submenu
+from utils import mostrar_menu, mostrar_submenu, limpar
+from validacao import ler_id
 
 def ler_valor():
-    while True:
+    validado = False
+    while not validado:
         try:
             valor = float(input("Digite o valor do produto: "))
+            if valor <= 0:
+                print("Erro: O valor do produto não pode ser negativo ou zero.")
+            else:
+                validado = True
         except ValueError:
             print("Erro: Digite um número válido.")
-            continue
 
-        if valor < 0:
-            print("Erro: O valor do produto não pode ser negativo.")
-            continue
-
-        return valor
-
+    return valor
 
 def ler_tamanho():
     print("Padrão de tamanhos: (PP, P, M, G, GG, XG)")
@@ -45,7 +42,7 @@ def ModuloRoupas():
     
         resp_roupas = ""
         while resp_roupas != "0":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_menu("Módulo de Roupas e Fantasias", [
                 "1 - Listar produto",
                 "2 - Adicionar produto",
@@ -57,7 +54,7 @@ def ModuloRoupas():
             resp_roupas = input("Digite o número do submódulo que quer acessar: ")
 
             if resp_roupas == "1":
-                os.system("cls" if os.name == "nt" else "clear")
+                limpar()
                 mostrar_submenu("Visualizar produto")
                 
                 if len(roupas) > 0:
@@ -88,7 +85,7 @@ def ModuloRoupas():
                 print()
 
             elif resp_roupas == "2":
-                os.system("cls" if os.name == "nt" else "clear")
+                limpar()
                 mostrar_submenu("Adicionar produto")
 
                 nome_produto = input("Digite o nome do produto: ")
@@ -118,7 +115,7 @@ def ModuloRoupas():
                 print()
 
             elif resp_roupas == "3":
-                os.system("cls" if os.name == "nt" else "clear")
+                limpar()
                 mostrar_submenu("Remover produto")
 
                 id_produto = ""
@@ -149,7 +146,7 @@ def ModuloRoupas():
                 print()
 
             elif resp_roupas == "4":
-                os.system("cls" if os.name == "nt" else "clear")
+                limpar()
                 mostrar_submenu("Atualizar produto")
 
                 id_produto = ""

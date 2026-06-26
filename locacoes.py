@@ -1,7 +1,7 @@
-import os
 from datetime import date, datetime
 from arquivos import recuperar_locacoes, recuperar_roupas, recuperar_clientes, gravar_locacoes
-from utils import ler_id, mostrar_menu, mostrar_submenu
+from utils import mostrar_menu, mostrar_submenu, limpar
+from validacao import ler_id
 
 def ler_id_existente(mensagem, dicionario, mensagem_erro):
     valor = ler_id(mensagem)
@@ -38,7 +38,7 @@ def ModuloLocacoes():
     
     resp_locacoes = ""
     while resp_locacoes != "0":
-        os.system("cls" if os.name == "nt" else "clear")
+        limpar()
         mostrar_menu("Módulo de Funcionários", [
             "1 - Listar locações",
             "2 - Adicionar locação",
@@ -50,7 +50,7 @@ def ModuloLocacoes():
         resp_locacoes = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_locacoes == "1":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Visualizar locação")
 
             if len(locacoes) > 0:
@@ -91,7 +91,7 @@ def ModuloLocacoes():
             print()
 
         elif resp_locacoes == "2":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Adicionar locação")
 
             id_cliente_loc = ler_id_existente("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
@@ -123,7 +123,7 @@ def ModuloLocacoes():
             print()
 
         elif resp_locacoes == "3":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Remover locação")
 
             id_locacao = ""
@@ -168,7 +168,7 @@ def ModuloLocacoes():
             print()
 
         elif resp_locacoes == "4":
-            os.system("cls" if os.name == "nt" else "clear")
+            limpar()
             mostrar_submenu("Atualizar locação")
 
             id_locacao = ""

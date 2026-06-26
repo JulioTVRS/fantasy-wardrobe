@@ -1,8 +1,5 @@
-import os
-import pickle
-
-from utils import mostrar_menu
-from arquivos import recuperar_clientes, recuperar_funcionarios, recuperar_locacoes, recuperar_roupas, gravar_roupas, gravar_clientes, gravar_funcionarios, gravar_locacoes
+from utils import mostrar_menu, limpar
+from arquivos import *
 from roupas import ModuloRoupas
 from clientes import ModuloClientes
 from funcionarios import ModuloFuncionarios
@@ -15,7 +12,7 @@ while resp != "0":
     clientes = recuperar_clientes()
     locacoes = recuperar_locacoes()
     
-    os.system("cls" if os.name == "nt" else "clear")
+    limpar()
     mostrar_menu("Fantasy Wardrobe", [
         "1 - Roupas e Fantasias",
         "2 - Clientes",
@@ -41,7 +38,7 @@ while resp != "0":
         ModuloLocacoes()
 
     elif resp == "5":
-        os.system("cls" if os.name == "nt" else "clear")
+        limpar()
         print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
         print("|-                               -|")
         print("|-      Módulo de Relatórios     -|")
@@ -57,7 +54,7 @@ while resp != "0":
         print()
 
     elif resp == "6":
-        os.system("cls" if os.name == "nt" else "clear")
+        limpar()
         print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
         print("|-                               -|")
         print("|-        Sobre o Sistema        -|")
