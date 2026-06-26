@@ -80,7 +80,7 @@ def AdicionarRoupas(roupas):
 
     id_produto = 1
     if len(roupas) > 0:
-        id_produto = list(roupas.keys())[-1] + 1
+        id_produto = max(roupas.keys()) + 1
 
     roupas[id_produto] = {
         "Nome": nome_produto.capitalize(),

@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from arquivos import recuperar_roupas, recuperar_clientes, recuperar_funcionarios, recuperar_locacoes
 from utils import mostrar_menu, mostrar_submenu, limpar, data_atual
-from validacao import ler_nome, ler_id_existente
+from validacao import ler_nome, ler_id_existente_geral
 
 def ListarTodosClientes(clientes):
     limpar()
@@ -66,7 +66,7 @@ def ListarClientesAniversariantes(clientes):
         print(f"┃     ID     ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃  Data de Nasc. ┃")
         print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
         for id, value in encontrados.items():
-            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃ {value["DataNascimento"]:^14} ┃")
+            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃ {value['DataNascimento']:^14} ┃")
         print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
     else:
         print()
@@ -96,7 +96,7 @@ def ListarFuncionariosAniversariantes(funcionarios):
         print(f"┃     ID     ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃  Data de Nasc. ┃")
         print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
         for id, value in encontrados.items():
-            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃ {value["DataNascimento"]:^14} ┃")
+            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃ {value['DataNascimento']:^14} ┃")
         print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
     else:
         print()
@@ -124,7 +124,7 @@ def ListarTodasLocacoes(locacoes, clientes, roupas):
         for id, value in encontrados.items():
             ID_Produto = value["ID_Produto"]
             ID_Cliente = value['ID_Cliente']
-            print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]["Nome"]:<30} ┃ {clientes[ID_Cliente]["Nome"]:<30} ┃ {value["CheckIn"]:^16} ┃ {value["CheckOut"]:^16} ┃")
+            print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]['Nome']:<30} ┃ {clientes[ID_Cliente]['Nome']:<30} ┃ {value['CheckIn']:^16} ┃ {value['CheckOut']:^16} ┃")
         print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
     else:
         print()
@@ -157,7 +157,7 @@ def ListarLocacoesPendentes(locacoes, clientes, roupas):
         for id, value in encontrados.items():
             ID_Produto = value["ID_Produto"]
             ID_Cliente = value['ID_Cliente']
-            print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]["Nome"]:<30} ┃ {clientes[ID_Cliente]["Nome"]:<30} ┃ {value["CheckIn"]:^16} ┃ {value["CheckOut"]:^16} ┃")
+            print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]['Nome']:<30} ┃ {clientes[ID_Cliente]['Nome']:<30} ┃ {value['CheckIn']:^16} ┃ {value['CheckOut']:^16} ┃")
         print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
     else:
         print()
@@ -175,7 +175,7 @@ def ListarLocacoesPeloCliente(locacoes, clientes, roupas):
 
     encontrados = {}
     for id, value in clientes.items():
-        if nome_pesquisa.lower().strip() in value['Nome'].lower() and value['Ativo']:
+        if nome_pesquisa.lower().strip() in value['Nome'].lower():
             encontrados[id] = value
             
     if len(encontrados) > 0:
@@ -184,7 +184,7 @@ def ListarLocacoesPeloCliente(locacoes, clientes, roupas):
         for id, value in encontrados.items():
             print(f"ID: {id} - {value['Nome']}")
 
-        id_pesquisa = ler_id_existente("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
+        id_pesquisa = ler_id_existente_geral("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
 
         locacoespesquisa = {}
 
@@ -203,7 +203,7 @@ def ListarLocacoesPeloCliente(locacoes, clientes, roupas):
             for id, value in locacoespesquisa.items():
                 ID_Produto = value["ID_Produto"]
                 ID_Cliente = value['ID_Cliente']
-                print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]["Nome"]:<30} ┃ {clientes[ID_Cliente]["Nome"]:<30} ┃ {value["CheckIn"]:^16} ┃ {value["CheckOut"]:^16} ┃")
+                print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]['Nome']:<30} ┃ {clientes[ID_Cliente]['Nome']:<30} ┃ {value['CheckIn']:^16} ┃ {value['CheckOut']:^16} ┃")
             print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
         else:
             print()

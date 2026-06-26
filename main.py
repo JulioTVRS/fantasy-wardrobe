@@ -62,11 +62,6 @@ def Sistema():
             print()
             print("Opção inválida!")
             input("Aperte (ENTER) para retornar.")
-    
-    gravar_roupas(roupas)
-    gravar_clientes(clientes)
-    gravar_funcionarios(funcionarios)
-    gravar_locacoes(locacoes)
             
 Sistema()
         

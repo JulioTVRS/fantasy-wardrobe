@@ -81,7 +81,7 @@ def AdicionarLocacao(locacoes, clientes, roupas):
 
     id_locacao = 1
     if len(locacoes) > 0:
-        id_locacao = list(locacoes.keys())[-1] + 1
+        id_locacao = max(locacoes.keys()) + 1
 
     locacoes[id_locacao] = {
         "ID_Cliente": id_cliente_loc,
