@@ -1,6 +1,6 @@
 from arquivos import recuperar_clientes, gravar_clientes
 from utils import mostrar_menu, mostrar_submenu, limpar
-from validacao import ler_id, ler_cpf, ler_email
+from validacao import ler_id, ler_cpf, ler_email, ler_nome
 
 def ListarClientes(clientes):
     limpar()
@@ -37,7 +37,7 @@ def AdicionarClientes(clientes):
     limpar()
     mostrar_submenu("Adicionar cliente")
 
-    nome_cliente = input("Digite o nome do cliente: ")
+    nome_cliente = ler_nome("Digite o nome do cliente: ", "O nome não pode ser vazio, tente novamente!")
     cpf_cliente = ler_cpf()
 
     print("Modelo de telefone: (00) 00000-0000")
@@ -123,7 +123,7 @@ def AtualizarClientes(clientes):
 
                 print()
                 print("Informações novas:")
-                nome_cliente = input("Digite o nome do cliente: ")
+                nome_cliente = ler_nome("Digite o nome do cliente: ", "O nome não pode ser vazio, tente novamente!")
 
                 print("Modelo de telefone: (00) 00000-0000")
                 tel_cliente = input("Digite o telefone do cliente: ")

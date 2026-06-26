@@ -1,6 +1,6 @@
 from arquivos import recuperar_roupas, gravar_roupas
 from utils import mostrar_menu, mostrar_submenu, limpar
-from validacao import ler_id
+from validacao import ler_id, ler_nome
 
 def ler_valor():
     validado = False
@@ -72,7 +72,7 @@ def AdicionarRoupas(roupas):
     limpar()
     mostrar_submenu("Adicionar produto")
 
-    nome_produto = input("Digite o nome do produto: ")
+    nome_produto = ler_nome("Digite o nome do produto: ", "O nome não pode ser vazio, tente novamente!")
     valor_produto = ler_valor()
     desc_produto = input("Digite a descrição do produto: ")
     tam_produto = ler_tamanho()
@@ -151,7 +151,7 @@ def AtualizarProduto(roupas):
 
                 print()
                 print("Informações novas:")
-                nome_produto = input("Digite o nome do produto: ")
+                nome_produto = ler_nome("Digite o nome do produto: ", "O nome não pode ser vazio, tente novamente!")
                 valor_produto = ler_valor()
                 desc_produto = input("Digite a descrição do produto: ")
                 tam_produto = ler_tamanho()

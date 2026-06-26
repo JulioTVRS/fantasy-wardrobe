@@ -1,6 +1,6 @@
 from arquivos import recuperar_funcionarios, gravar_funcionarios
 from utils import mostrar_menu, mostrar_submenu, limpar
-from validacao import ler_email, ler_id, ler_cpf
+from validacao import ler_email, ler_id, ler_cpf, ler_nome
 
 def ListarFuncionarios(funcionarios):
     limpar()
@@ -37,7 +37,7 @@ def AdicionarFuncionarios(funcionarios):
     limpar()
     mostrar_submenu("Adicionar funcionário")
 
-    nome_funcionario = input("Digite o nome do funcionário: ")
+    nome_funcionario = ler_nome("Digite o nome do funcionário: ", "O nome não pode ser vazio, tente novamente!")
     cpf_funcionario = ler_cpf()
 
     print("Modelo de telefone: (00) 00000-0000")
@@ -123,7 +123,7 @@ def AtualizarFuncionarios(funcionarios):
 
                 print()
                 print("Informações novas:")
-                nome_funcionario = input("Digite o nome do funcionário: ")
+                nome_funcionario = ler_nome("Digite o nome do funcionário: ", "O nome não pode ser vazio, tente novamente!")
 
                 print("Modelo de telefone: (00) 00000-0000")
                 tel_funcionario = input("Digite o telefone do funcionário: ")

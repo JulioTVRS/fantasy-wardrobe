@@ -1,7 +1,7 @@
 def ler_id(mensagem):
     valor = input(mensagem)
     while not valor.isdigit():
-        print("Erro: Um ID consiste apenas em números.")
+        print("Um ID consiste apenas em números. Tente novamente.")
         valor = input(mensagem)
     return int(valor)
 
@@ -59,3 +59,13 @@ def ler_email(mensagem, mensagem_erro):
             print(mensagem_erro)
 
     return email.strip()
+
+def ler_nome(mensagem, mensagem_erro):
+    validado = False
+    while not validado:
+        nome = input(mensagem)
+        if nome.strip() != "":
+            validado = True
+        else:
+            print(mensagem_erro)
+    return nome
