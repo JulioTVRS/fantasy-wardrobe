@@ -1,3 +1,4 @@
+from datetime import datetime, date
 from arquivos import recuperar_roupas, recuperar_clientes, recuperar_funcionarios, recuperar_locacoes
 from utils import mostrar_menu, mostrar_submenu, limpar, data_atual
 from validacao import ler_nome
@@ -69,11 +70,60 @@ def ListarClientesAniversariantes(clientes):
         print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
     else:
         print()
-        print("Nenhum cliente encontrado com esse nome.")
+        print("Nenhum cliente faz aniversário este mês.")
 
     print()
     input("Aperte (ENTER) para continuar.")
     print()
+
+def ListarFuncionariosAniversariantes(funcionarios):
+    limpar()
+    mostrar_submenu("Listando funcionários aniversariantes")
+
+    encontrados = {}
+    
+    for id, value in funcionarios.items():
+        if value["Ativo"]:
+            funcionario_mes_nasc = value["DataNascimento"].split("/")[1]
+            hoje = data_atual().split("/")[1]
+
+            if funcionario_mes_nasc == hoje:
+                encontrados[id] = value
+
+    if len(encontrados) > 0:
+        print()
+        print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
+        print(f"┃     ID     ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃  Data de Nasc. ┃")
+        print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
+        for id, value in encontrados.items():
+            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃ {value["DataNascimento"]:^14} ┃")
+        print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
+    else:
+        print()
+        print("Nenhum funcionário faz aniversário este mês.")
+
+    print()
+    input("Aperte (ENTER) para continuar.")
+    print()
+
+def ListarLocacoesAtivas(locacoes, clientes, roupas):
+    limpar()
+    mostrar_submenu("Listando locações ativas")
+
+    hoje = datetime.strptime(data_atual(), "%d/%m/%Y").date()
+
+    encontrados = {}
+
+    for id, value in locacoes.items():
+        if value["Ativo"]:
+            checkout = datetime.strptime(value["CheckOut"], "%d/%m/%Y").date()
+
+            if checkout >= hoje:
+                encontrados[id] = value
+
+    print(encontrados)
+    input()
+
 
 def ModuloRelatorios():
     limpar()
@@ -106,4 +156,9 @@ def ModuloRelatorios():
         elif resp_relatorios == "3":
             ListarClientesAniversariantes(clientes)
         
+        elif resp_relatorios == "4":
+            ListarFuncionariosAniversariantes(funcionarios)
+
+        elif resp_relatorios == "5":
+            ListarLocacoesAtivas(locacoes, clientes, roupas)
         
