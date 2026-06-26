@@ -1,5 +1,5 @@
 from arquivos import recuperar_roupas, recuperar_clientes, recuperar_funcionarios, recuperar_locacoes
-from utils import mostrar_menu, mostrar_submenu, limpar
+from utils import mostrar_menu, mostrar_submenu, limpar, data_atual
 from validacao import ler_nome
 
 def ListarTodosClientes(clientes):
@@ -46,7 +46,34 @@ def ListarClientesPeloNome(clientes):
     print()
 
 def ListarClientesAniversariantes(clientes):
-    pass
+    limpar()
+    mostrar_submenu("Listando clientes aniversariantes")
+
+    encontrados = {}
+    
+    for id, value in clientes.items():
+        if value["Ativo"]:
+            cliente_mes_nasc = value["DataNascimento"].split("/")[1]
+            hoje = data_atual().split("/")[1]
+
+            if cliente_mes_nasc == hoje:
+                encontrados[id] = value
+
+    if len(encontrados) > 0:
+        print()
+        print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
+        print(f"┃     ID     ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃  Data de Nasc. ┃")
+        print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
+        for id, value in encontrados.items():
+            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃ {value["DataNascimento"]:^14} ┃")
+        print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
+    else:
+        print()
+        print("Nenhum cliente encontrado com esse nome.")
+
+    print()
+    input("Aperte (ENTER) para continuar.")
+    print()
 
 def ModuloRelatorios():
     limpar()
@@ -72,7 +99,11 @@ def ModuloRelatorios():
         
         if resp_relatorios == "1":
             ListarTodosClientes(clientes)
+
         elif resp_relatorios == "2":
             ListarClientesPeloNome(clientes)
+
+        elif resp_relatorios == "3":
+            ListarClientesAniversariantes(clientes)
         
         

@@ -20,13 +20,13 @@ def menu(titulo, opcoes):
     return menu
 
 def submenu(titulo):
-    borda_cima = "┏" + "┅" * 35 + "┓"
-    borda_baixo = "┗" + "┅" * 35 + "┛"
+    borda_cima = "┏" + "┅" * 45 + "┓"
+    borda_baixo = "┗" + "┅" * 45 + "┛"
 
     menu = borda_cima + "\n"
-    menu += "┃" + " " * 35 + "┃\n"
-    menu += "┃" + titulo.center(35) + "┃\n"
-    menu += "┃" + " " * 35 + "┃\n"
+    menu += "┃" + " " * 45 + "┃\n"
+    menu += "┃" + titulo.center(45) + "┃\n"
+    menu += "┃" + " " * 45 + "┃\n"
     menu += borda_baixo
 
     return menu
