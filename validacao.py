@@ -1,3 +1,5 @@
+from datetime import datetime, date
+
 def ler_id(mensagem):
     valor = input(mensagem)
     while not valor.isdigit():
@@ -69,3 +71,23 @@ def ler_nome(mensagem, mensagem_erro):
         else:
             print(mensagem_erro)
     return nome
+
+def ler_data_aniversario(mensagem, mensagem_erro):
+    data = input(mensagem)
+    verificado = False
+    
+    while not verificado:
+        try:
+            datamodelo = datetime.strptime(data, "%d/%m/%Y").date()
+            
+            if datamodelo <= date.today():
+                verificado = True
+            else:
+                print(mensagem_erro)
+                data = input(mensagem)
+                
+        except ValueError:
+            print(mensagem_erro)
+            data = input(mensagem)
+            
+    return data

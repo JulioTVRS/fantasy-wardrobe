@@ -1,6 +1,6 @@
 from arquivos import recuperar_clientes, gravar_clientes
 from utils import mostrar_menu, mostrar_submenu, limpar
-from validacao import ler_id, ler_cpf, ler_email, ler_nome
+from validacao import ler_id, ler_cpf, ler_email, ler_nome, ler_data_aniversario
 
 def ListarClientes(clientes):
     limpar()
@@ -16,6 +16,7 @@ def ListarClientes(clientes):
                     if clientes[id_cliente]["Ativo"]:
                         print()
                         print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                        print("Data de nascimento:", clientes[id_cliente]["DataNascimento"])
                         print("Endereço:", clientes[id_cliente]["Endereco"])
                         print()
                     else:
@@ -39,6 +40,7 @@ def AdicionarClientes(clientes):
 
     nome_cliente = ler_nome("Digite o nome do cliente: ", "O nome não pode ser vazio, tente novamente!")
     cpf_cliente = ler_cpf()
+    datanasc_cliente = ler_data_aniversario("Digite a data de nascimento do cliente: ", "A data é invalida, tente novamente!")
 
     print("Modelo de telefone: (00) 00000-0000")
     tel_cliente = input("Digite o telefone do cliente: ")
@@ -57,6 +59,7 @@ def AdicionarClientes(clientes):
         "Telefone": tel_cliente,
         "Email": email_cliente,
         "Endereco": endereco_cliente,
+        "DataNascimento": datanasc_cliente,
         "Ativo": True
     }
 
@@ -84,6 +87,7 @@ def RemoverClientes(clientes):
             if clientes[id_cliente]["Ativo"]:
                 encontrado = True
                 print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                print("Data de nascimento:", clientes[id_cliente]["DataNascimento"])
                 print("Endereço:", clientes[id_cliente]["Endereco"])
                 print("Tem certeza que deseja remover esse cliente?")
                 decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
@@ -119,6 +123,7 @@ def AtualizarClientes(clientes):
                 encontrado = True
                 print("Informações antigas:")
                 print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                print("Data de nascimento:", clientes[id_cliente]["DataNascimento"])
                 print("Endereço:", clientes[id_cliente]["Endereco"])
 
                 print()
@@ -138,6 +143,7 @@ def AtualizarClientes(clientes):
                     "Telefone": tel_cliente,
                     "Email": email_cliente,
                     "Endereco": endereco_cliente,
+                    "DataNascimento": clientes[id_cliente]["DataNascimento"],
                     "Ativo": True
                 }
 
@@ -147,6 +153,7 @@ def AtualizarClientes(clientes):
                 print()
                 print("Informações novas:")
                 print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                print("Data de nascimento:", clientes[id_cliente]["DataNascimento"])
                 print("Endereço:", clientes[id_cliente]["Endereco"])
             else:
                 print("Cliente inativo. (Removido)")

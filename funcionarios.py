@@ -1,6 +1,6 @@
 from arquivos import recuperar_funcionarios, gravar_funcionarios
 from utils import mostrar_menu, mostrar_submenu, limpar
-from validacao import ler_email, ler_id, ler_cpf, ler_nome
+from validacao import ler_email, ler_id, ler_cpf, ler_nome, ler_data_aniversario
 
 def ListarFuncionarios(funcionarios):
     limpar()
@@ -16,6 +16,7 @@ def ListarFuncionarios(funcionarios):
                     if funcionarios[id_funcionario]["Ativo"]:
                         print()
                         print("Funcionário > ID:", id_funcionario, "-", funcionarios[id_funcionario]["Nome"], "| CPF:", funcionarios[id_funcionario]["CPF"], "| Telefone:", funcionarios[id_funcionario]["Telefone"], "| E-mail:", funcionarios[id_funcionario]["Email"])
+                        print("Data de nascimento:", funcionarios[id_funcionario]["DataNascimento"])
                         print("Endereço:", funcionarios[id_funcionario]["Endereco"])
                         print()
                     else:
@@ -39,6 +40,7 @@ def AdicionarFuncionarios(funcionarios):
 
     nome_funcionario = ler_nome("Digite o nome do funcionário: ", "O nome não pode ser vazio, tente novamente!")
     cpf_funcionario = ler_cpf()
+    datanasc_funcionario = ler_data_aniversario("Digite a data de nascimento do funcionário: ", "A data é invalida, tente novamente!")
 
     print("Modelo de telefone: (00) 00000-0000")
     tel_funcionario = input("Digite o telefone do funcionário: ")
@@ -57,6 +59,7 @@ def AdicionarFuncionarios(funcionarios):
         "Telefone": tel_funcionario,
         "Email": email_funcionario,
         "Endereco": endereco_funcionario,
+        "DataNascimento": datanasc_funcionario,
         "Ativo": True
     }
 
@@ -84,6 +87,7 @@ def RemoverFuncionarios(funcionarios):
             if funcionarios[id_funcionario]["Ativo"]:
                 encontrado = True
                 print("Funcionário > ID:", id_funcionario, "-", funcionarios[id_funcionario]["Nome"], "| CPF:", funcionarios[id_funcionario]["CPF"], "| Telefone:", funcionarios[id_funcionario]["Telefone"], "| E-mail:", funcionarios[id_funcionario]["Email"])
+                print("Data de nascimento:", funcionarios[id_funcionario]["DataNascimento"])
                 print("Endereço:", funcionarios[id_funcionario]["Endereco"])
                 print("Tem certeza que deseja remover esse funcionário?")
                 decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
@@ -119,6 +123,7 @@ def AtualizarFuncionarios(funcionarios):
                 encontrado = True
                 print("Informações antigas:")
                 print("Funcionário > ID:", id_funcionario, "-", funcionarios[id_funcionario]["Nome"], "| CPF:", funcionarios[id_funcionario]["CPF"], "| Telefone:", funcionarios[id_funcionario]["Telefone"], "| E-mail:", funcionarios[id_funcionario]["Email"])
+                print("Data de nascimento:", funcionarios[id_funcionario]["DataNascimento"])
                 print("Endereço:", funcionarios[id_funcionario]["Endereco"])
 
                 print()
@@ -138,6 +143,7 @@ def AtualizarFuncionarios(funcionarios):
                     "Telefone": tel_funcionario,
                     "Email": email_funcionario,
                     "Endereco": endereco_funcionario,
+                    "DataNascimento": funcionarios[id_funcionario]["DataNascimento"],
                     "Ativo": True
                 }
 
@@ -148,6 +154,7 @@ def AtualizarFuncionarios(funcionarios):
                 print()
                 print("Informações novas:")
                 print("Funcionário > ID:", id_funcionario, "-", funcionarios[id_funcionario]["Nome"], "| CPF:", funcionarios[id_funcionario]["CPF"], "| Telefone:", funcionarios[id_funcionario]["Telefone"], "| E-mail:", funcionarios[id_funcionario]["Email"])
+                print("Data de nascimento:", funcionarios[id_funcionario]["DataNascimento"])
                 print("Endereço:", funcionarios[id_funcionario]["Endereco"])
             else:
                 print("Funcionário inativo. (Removido)")

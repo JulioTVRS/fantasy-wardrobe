@@ -36,6 +36,7 @@ def recuperar_clientes():
                 "Telefone": "(84) 12345-6789",
                 "Email": "fulano5@gmail.com",
                 "Endereco": "Rua das Palmeiras, 245, Lagoa Nova, Natal - RN, CEP 59075-320",
+                "DataNascimento": "15/12/2000",
                 "Ativo": True
             }
         }
@@ -58,6 +59,7 @@ def recuperar_funcionarios():
                 "Telefone": "(84) 54321-6789",
                 "Email": "beltrano1@gmail.com",
                 "Endereco": "Rua das Palmeiras, 246, Lagoa Nova, Natal - RN, CEP 59075-320",
+                "DataNascimento": "05/06/1997",
                 "Ativo": True
             }
         }

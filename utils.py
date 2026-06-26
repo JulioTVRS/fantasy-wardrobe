@@ -1,5 +1,6 @@
 import os
 import subprocess
+from datetime import date
 
 def menu(titulo, opcoes):
     borda = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
@@ -38,3 +39,6 @@ def limpar():
         subprocess.run("cls", shell=True)
     else:
         subprocess.run("clear", shell=True)
+        
+def data_atual():
+    return str(date.today().day) + "/" + str(date.today().month) + "/" + str(date.today().year)

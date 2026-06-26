@@ -1,6 +1,6 @@
-from datetime import date, datetime
+from datetime import datetime, date
 from arquivos import recuperar_locacoes, recuperar_roupas, recuperar_clientes, gravar_locacoes
-from utils import mostrar_menu, mostrar_submenu, limpar
+from utils import mostrar_menu, mostrar_submenu, limpar, data_atual
 from validacao import ler_id
 
 def ler_id_existente(mensagem, dicionario, mensagem_erro):
@@ -29,7 +29,7 @@ def ler_data(mensagem, mensagem_erro):
             data = input(mensagem)
             
     return data
-    
+
 def ListarLocacoes(locacoes, clientes, roupas):
     limpar()
     mostrar_submenu("Visualizar locação")
@@ -78,7 +78,7 @@ def AdicionarLocacao(locacoes, clientes, roupas):
     id_cliente_loc = ler_id_existente("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
     id_produto_loc = ler_id_existente("Digite o ID do produto: ", roupas, "Não existe um produto com esse ID.")
 
-    checkin_loc = str(date.today().day) + "/" + str(date.today().month) + "/" + str(date.today().year)
+    checkin_loc = data_atual()
 
     print("Formato de data: DD/MM/AAAA")
 
@@ -185,7 +185,7 @@ def AtualizarLocacoes(locacoes, clientes, roupas):
                 id_produto_loc = ler_id_existente("Digite o ID do produto: ", roupas, "Não existe um produto com esse ID.")
 
                 print("Formato de data: DD/MM/AAAA")
-                checkin_loc = input("Digite a data de Check-in: ")
+                checkin_loc = data_atual()
 
                 checkout_loc = ler_data("Digite a data de Check-out: ", "Data inválida, tente novamente!")
 
