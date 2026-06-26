@@ -2,11 +2,166 @@ from arquivos import recuperar_clientes, gravar_clientes
 from utils import mostrar_menu, mostrar_submenu, limpar
 from validacao import ler_id, ler_cpf, ler_email
 
-def ModuloClientes():
-    clientes = recuperar_clientes()
+def ListarClientes(clientes):
+    limpar()
+    mostrar_submenu("Visualizar cliente")
+
+    if len(clientes) > 0:
+        id_cliente = ""
+        while id_cliente != 0:
+            id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
+
+            if id_cliente != 0:
+                if id_cliente in clientes:
+                    if clientes[id_cliente]["Ativo"]:
+                        print()
+                        print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                        print("Endereço:", clientes[id_cliente]["Endereco"])
+                        print()
+                    else:
+                        print()
+                        print(f"Cliente com ID ({id_cliente}) inativo. (Excluído)")
+                        print()
+                else:
+                    print()
+                    print(f"Cliente com ID ({id_cliente}) não encontrado.")
+                    print()
+    else:
+        print("Não existe nenhum cliente cadastrado no sistema.")
+
+    print()
+    input("Aperte (ENTER) para continuar.")
+    print()
     
+def AdicionarClientes(clientes):
+    limpar()
+    mostrar_submenu("Adicionar cliente")
+
+    nome_cliente = input("Digite o nome do cliente: ")
+    cpf_cliente = ler_cpf()
+
+    print("Modelo de telefone: (00) 00000-0000")
+    tel_cliente = input("Digite o telefone do cliente: ")
+
+    email_cliente = ler_email("Digite o e-mail do cliente: ", "E-mail inválido, tente novamente!")
+
+    endereco_cliente = input("Digite o endereço do cliente: ")
+
+    id_cliente = 1
+    if len(clientes) > 0:
+        id_cliente = list(clientes.keys())[-1] + 1
+
+    clientes[id_cliente] = {
+        "Nome": nome_cliente.title(),
+        "CPF": cpf_cliente,
+        "Telefone": tel_cliente,
+        "Email": email_cliente,
+        "Endereco": endereco_cliente,
+        "Ativo": True
+    }
+
+    gravar_clientes(clientes)
+
+    print("(ID: %d) Cliente adicionado com sucesso!" % id_cliente)
+    print()
+    input("Aperte (ENTER) para retornar.")
+    print()
+    
+def RemoverClientes(clientes):
+    limpar()
+    mostrar_submenu("Remover cliente")
+
+    id_cliente = ""
+    encontrado = False
+    while not encontrado:
+        id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
+
+        if id_cliente == 0:
+            encontrado = True
+            continue
+
+        if id_cliente in clientes:
+            if clientes[id_cliente]["Ativo"]:
+                encontrado = True
+                print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                print("Endereço:", clientes[id_cliente]["Endereco"])
+                print("Tem certeza que deseja remover esse cliente?")
+                decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
+
+                if decisao.lower() == "s":
+                    clientes[id_cliente]["Ativo"] = False
+                    gravar_clientes(clientes)
+                    print("Cliente removido com sucesso!")
+            else:
+                print("Cliente inativo. (Já removido)")
+        else:
+            print("Não existe um cliente com esse ID.")
+
+    print()
+    input("Aperte (ENTER) para retornar.")
+    print()
+    
+def AtualizarClientes(clientes):
+    limpar()
+    mostrar_submenu("Atualizar cliente")
+
+    id_cliente = ""
+    encontrado = False
+    while not encontrado:
+        id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
+
+        if id_cliente == 0:
+            encontrado = True
+            continue
+
+        if id_cliente in clientes:
+            if clientes[id_cliente]["Ativo"]:
+                encontrado = True
+                print("Informações antigas:")
+                print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                print("Endereço:", clientes[id_cliente]["Endereco"])
+
+                print()
+                print("Informações novas:")
+                nome_cliente = input("Digite o nome do cliente: ")
+
+                print("Modelo de telefone: (00) 00000-0000")
+                tel_cliente = input("Digite o telefone do cliente: ")
+
+                email_cliente = ler_email("Digite o e-mail do cliente: ", "E-mail inválido, tente novamente!")
+
+                endereco_cliente = input("Digite o endereço do cliente: ")
+
+                clientes[id_cliente] = {
+                    "Nome": nome_cliente.title(),
+                    "CPF": clientes[id_cliente]["CPF"],
+                    "Telefone": tel_cliente,
+                    "Email": email_cliente,
+                    "Endereco": endereco_cliente,
+                    "Ativo": True
+                }
+
+                gravar_clientes(clientes)
+                print("Cliente atualizado com sucesso!")
+
+                print()
+                print("Informações novas:")
+                print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
+                print("Endereço:", clientes[id_cliente]["Endereco"])
+            else:
+                print("Cliente inativo. (Removido)")
+        else:
+            print("Não existe um cliente com esse ID.")
+
+    print()
+    input("Aperte (ENTER) para retornar.")
+    print()
+
+def ModuloClientes():
     resp_clientes = ""
     while resp_clientes != "0":
+        clientes = recuperar_clientes()
+        
         limpar()
         mostrar_menu("Módulo de Clientes", [
             "1 - Listar clientes",
@@ -19,156 +174,13 @@ def ModuloClientes():
         resp_clientes = input("Digite o número do submódulo que quer acessar: ")
 
         if resp_clientes == "1":
-            limpar()
-            mostrar_submenu("Visualizar cliente")
-
-            if len(clientes) > 0:
-                id_cliente = ""
-                while id_cliente != 0:
-                    id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
-
-                    if id_cliente != 0:
-                        if id_cliente in clientes:
-                            if clientes[id_cliente]["Ativo"]:
-                                print()
-                                print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
-                                print("Endereço:", clientes[id_cliente]["Endereco"])
-                                print()
-                            else:
-                                print()
-                                print(f"Cliente com ID ({id_cliente}) inativo. (Excluído)")
-                                print()
-                        else:
-                            print()
-                            print(f"Cliente com ID ({id_cliente}) não encontrado.")
-                            print()
-            else:
-                print("Não existe nenhum cliente cadastrado no sistema.")
-
-            print()
-            input("Aperte (ENTER) para continuar.")
-            print()
+            ListarClientes(clientes)
 
         elif resp_clientes == "2":
-            limpar()
-            mostrar_submenu("Adicionar cliente")
-
-            nome_cliente = input("Digite o nome do cliente: ")
-            cpf_cliente = ler_cpf()
-
-            print("Modelo de telefone: (00) 00000-0000")
-            tel_cliente = input("Digite o telefone do cliente: ")
-
-            email_cliente = ler_email("Digite o e-mail do cliente: ", "E-mail inválido, tente novamente!")
-
-            endereco_cliente = input("Digite o endereço do cliente: ")
-
-            id_cliente = 1
-            if len(clientes) > 0:
-                id_cliente = list(clientes.keys())[-1] + 1
-
-            clientes[id_cliente] = {
-                "Nome": nome_cliente.title(),
-                "CPF": cpf_cliente,
-                "Telefone": tel_cliente,
-                "Email": email_cliente,
-                "Endereco": endereco_cliente,
-                "Ativo": True
-            }
-
-            gravar_clientes(clientes)
-
-            print("(ID: %d) Cliente adicionado com sucesso!" % id_cliente)
-            print()
-            input("Aperte (ENTER) para retornar.")
-            print()
+            AdicionarClientes(clientes)
 
         elif resp_clientes == "3":
-            limpar()
-            mostrar_submenu("Remover cliente")
-
-            id_cliente = ""
-            encontrado = False
-            while not encontrado:
-                id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
-
-                if id_cliente == 0:
-                    encontrado = True
-                    continue
-
-                if id_cliente in clientes:
-                    if clientes[id_cliente]["Ativo"]:
-                        encontrado = True
-                        print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
-                        print("Endereço:", clientes[id_cliente]["Endereco"])
-                        print("Tem certeza que deseja remover esse cliente?")
-                        decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
-
-                        if decisao.lower() == "s":
-                            clientes[id_cliente]["Ativo"] = False
-                            gravar_clientes(clientes)
-                            print("Cliente removido com sucesso!")
-                    else:
-                        print("Cliente inativo. (Já removido)")
-                else:
-                    print("Não existe um cliente com esse ID.")
-
-            print()
-            input("Aperte (ENTER) para retornar.")
-            print()
+            RemoverClientes(clientes)
 
         elif resp_clientes == "4":
-            limpar()
-            mostrar_submenu("Atualizar cliente")
-
-            id_cliente = ""
-            encontrado = False
-            while not encontrado:
-                id_cliente = ler_id("Digite o ID do cliente (ou 0 para voltar): ")
-
-                if id_cliente == 0:
-                    encontrado = True
-                    continue
-
-                if id_cliente in clientes:
-                    if clientes[id_cliente]["Ativo"]:
-                        encontrado = True
-                        print("Informações antigas:")
-                        print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
-                        print("Endereço:", clientes[id_cliente]["Endereco"])
-
-                        print()
-                        print("Informações novas:")
-                        nome_cliente = input("Digite o nome do cliente: ")
-
-                        print("Modelo de telefone: (00) 00000-0000")
-                        tel_cliente = input("Digite o telefone do cliente: ")
-
-                        email_cliente = ler_email("Digite o e-mail do cliente: ", "E-mail inválido, tente novamente!")
-
-                        endereco_cliente = input("Digite o endereço do cliente: ")
-
-                        clientes[id_cliente] = {
-                            "Nome": nome_cliente.title(),
-                            "CPF": clientes[id_cliente]["CPF"],
-                            "Telefone": tel_cliente,
-                            "Email": email_cliente,
-                            "Endereco": endereco_cliente,
-                            "Ativo": True
-                        }
-
-                        gravar_clientes(clientes)
-                        print("Cliente atualizado com sucesso!")
-
-                        print()
-                        print("Informações novas:")
-                        print("Cliente > ID:", id_cliente, "-", clientes[id_cliente]["Nome"], "| CPF:", clientes[id_cliente]["CPF"], "| Telefone:", clientes[id_cliente]["Telefone"], "| E-mail:", clientes[id_cliente]["Email"])
-                        print("Endereço:", clientes[id_cliente]["Endereco"])
-                    else:
-                        print("Cliente inativo. (Removido)")
-                else:
-                    print("Não existe um cliente com esse ID.")
-
-            print()
-            input("Aperte (ENTER) para retornar.")
-            print()
+            AtualizarClientes(clientes)

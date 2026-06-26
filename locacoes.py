@@ -206,7 +206,7 @@ def ModuloLocacoes():
                         print("Formato de data: DD/MM/AAAA")
                         checkin_loc = input("Digite a data de Check-in: ")
 
-                        checkout_loc = input("Digite a data de Check-out: ")
+                        checkout_loc = ler_data("Digite a data de Check-out: ", "Data inválida, tente novamente!")
 
                         locacoes[id_locacao] = {
                             "ID_Cliente": id_cliente_loc,
