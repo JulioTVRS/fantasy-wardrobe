@@ -121,8 +121,23 @@ def ListarLocacoesAtivas(locacoes, clientes, roupas):
             if checkout >= hoje:
                 encontrados[id] = value
 
-    print(encontrados)
-    input()
+    if len(encontrados) > 0:
+        print()
+        print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
+        print(f"┃     ID     ┃   Nome do produto              ┃   Nome do cliente              ┃  Data Check-IN   ┃  Data Check-OUT  ┃")
+        print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
+        for id, value in encontrados.items():
+            ID_Produto = value["ID_Produto"]
+            ID_Cliente = value['ID_Cliente']
+            print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]["Nome"]:<30} ┃ {clientes[ID_Cliente]["Nome"]:<30} ┃ {value["CheckIn"]:^16} ┃ {value["CheckOut"]:^16} ┃")
+        print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
+    else:
+        print()
+        print("Nenhuma locação ativa encontrada.")
+
+    print()
+    input("Aperte (ENTER) para continuar.")
+    print()
 
 
 def ModuloRelatorios():
@@ -161,4 +176,7 @@ def ModuloRelatorios():
 
         elif resp_relatorios == "5":
             ListarLocacoesAtivas(locacoes, clientes, roupas)
+
+        elif resp_relatorios == "6":
+            pass
         
