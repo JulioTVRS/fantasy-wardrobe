@@ -1,5 +1,6 @@
 from arquivos import recuperar_roupas, recuperar_clientes, recuperar_funcionarios, recuperar_locacoes
 from utils import mostrar_menu, mostrar_submenu, limpar
+from validacao import ler_nome
 
 def ListarTodosClientes(clientes):
     limpar()
@@ -13,6 +14,33 @@ def ListarTodosClientes(clientes):
             print(f"┃ {str(id).center(10)} ┃ {value["Nome"]:<38} ┃ {value["CPF"]:^14} ┃ {value["Email"]:<36} ┃")
     print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
         
+    print()
+    input("Aperte (ENTER) para continuar.")
+    print()
+    
+def ListarClientesPeloNome(clientes):
+    limpar()
+    mostrar_submenu("Listando clientes pelo nome")
+
+    nome_pesquisa = ler_nome("Digite o nome (ou parte do nome) do cliente: ", "O nome não pode ser vazio, tente novamente!")
+
+    encontrados = {}
+    for id, value in clientes.items():
+        if nome_pesquisa.lower().strip() in value["Nome"].lower() and value["Ativo"]:
+            encontrados[id] = value
+
+    if len(encontrados) > 0:
+        print()
+        print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
+        print(f"┃ {"ID":^10} ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃")
+        print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
+        for id, value in encontrados.items():
+            print(f"┃ {str(id).center(10)} ┃ {value["Nome"]:<38} ┃ {value["CPF"]:^14} ┃ {value["Email"]:<36} ┃")
+        print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
+    else:
+        print()
+        print("Nenhum cliente encontrado com esse nome.")
+
     print()
     input("Aperte (ENTER) para continuar.")
     print()
@@ -41,10 +69,7 @@ def ModuloRelatorios():
         
         if resp_relatorios == "1":
             ListarTodosClientes(clientes)
-        else:
-            print("Opção inválida!")
-            print()
-            input("Aperte (ENTER) para continuar.")
-            print()
+        elif resp_relatorios == "2":
+            ListarClientesPeloNome(clientes)
         
         
