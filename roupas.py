@@ -183,29 +183,29 @@ def AtualizarProduto(roupas):
     print()
 
 def ModuloRoupas():
-        resp_roupas = ""
-        while resp_roupas != "0":
-            roupas = recuperar_roupas()
-            
-            limpar()
-            mostrar_menu("Módulo de Roupas e Fantasias", [
-                "1 - Listar produto",
-                "2 - Adicionar produto",
-                "3 - Remover produto",
-                "4 - Atualizar produto",
-                "0 - Voltar"
-            ])
+    resp_roupas = ""
+    while resp_roupas != "0":
+        roupas = recuperar_roupas()
+        
+        limpar()
+        mostrar_menu("Módulo de Roupas e Fantasias", [
+            "1 - Listar produto",
+            "2 - Adicionar produto",
+            "3 - Remover produto",
+            "4 - Atualizar produto",
+            "0 - Voltar"
+        ])
 
-            resp_roupas = input("Digite o número do submódulo que quer acessar: ")
+        resp_roupas = input("Digite o número do submódulo que quer acessar: ")
 
-            if resp_roupas == "1":
-                ListarRoupas(roupas)
+        if resp_roupas == "1":
+            ListarRoupas(roupas)
 
-            elif resp_roupas == "2":
-                AdicionarRoupas(roupas)
+        elif resp_roupas == "2":
+            AdicionarRoupas(roupas)
 
-            elif resp_roupas == "3":
-                RemoverRoupas(roupas)
+        elif resp_roupas == "3":
+            RemoverRoupas(roupas)
 
-            elif resp_roupas == "4":
-                AtualizarProduto(roupas)
+        elif resp_roupas == "4":
+            AtualizarProduto(roupas)
