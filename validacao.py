@@ -36,6 +36,10 @@ def ler_cpf():
         if digito1 != int(cpf[9]) or digito2 != int(cpf[10]) or len(set(cpf)) == 1:
             print("CPF inválido. Tente novamente.")
             cpf = input("Digite o CPF (apenas números): ")
+
+            while len(cpf) != 11 or not cpf.isdigit():
+                print("CPF inválido. Tente novamente.")
+                cpf = input("Digite o CPF (apenas números): ")
         else:
             validado = True
     

@@ -7,11 +7,11 @@ def ListarTodosClientes(clientes):
     mostrar_submenu("Listando todos os clientes")
     
     print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
-    print(f"┃ {"ID":^10} ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃")
+    print(f"┃     ID     ┃   Nome completo                        ┃   CPF          ┃   E-mail                             ┃")
     print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
     for id, value in clientes.items():
         if value["Ativo"]:
-            print(f"┃ {str(id).center(10)} ┃ {value["Nome"]:<38} ┃ {value["CPF"]:^14} ┃ {value["Email"]:<36} ┃")
+            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃")
     print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
         
     print()
@@ -26,16 +26,16 @@ def ListarClientesPeloNome(clientes):
 
     encontrados = {}
     for id, value in clientes.items():
-        if nome_pesquisa.lower().strip() in value["Nome"].lower() and value["Ativo"]:
+        if nome_pesquisa.lower().strip() in value['Nome'].lower() and value['Ativo']:
             encontrados[id] = value
 
     if len(encontrados) > 0:
         print()
         print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
-        print(f"┃ {"ID":^10} ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃")
+        print(f"┃     ID     ┃   Nome completo                        ┃   CPF          ┃  E-mail                              ┃")
         print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
         for id, value in encontrados.items():
-            print(f"┃ {str(id).center(10)} ┃ {value["Nome"]:<38} ┃ {value["CPF"]:^14} ┃ {value["Email"]:<36} ┃")
+            print(f"┃ {str(id).center(10)} ┃ {value['Nome']:<38} ┃ {value['CPF']:^14} ┃ {value['Email']:<36} ┃")
         print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
     else:
         print()
@@ -44,6 +44,9 @@ def ListarClientesPeloNome(clientes):
     print()
     input("Aperte (ENTER) para continuar.")
     print()
+
+def ListarClientesAniversariantes(clientes):
+    pass
 
 def ModuloRelatorios():
     limpar()

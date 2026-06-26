@@ -51,7 +51,7 @@ def AdicionarClientes(clientes):
 
     id_cliente = 1
     if len(clientes) > 0:
-        id_cliente = list(clientes.keys())[-1] + 1
+        id_cliente = max(clientes.keys()) + 1
 
     clientes[id_cliente] = {
         "Nome": nome_cliente.title(),

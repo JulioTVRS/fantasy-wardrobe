@@ -44,4 +44,4 @@ def limpar():
         subprocess.run("clear", shell=True)
         
 def data_atual():
-    return str(date.today().day) + "/" + str(date.today().month) + "/" + str(date.today().year)
+    return date.today().strftime("%d/%m/%Y")

@@ -51,7 +51,7 @@ def AdicionarFuncionarios(funcionarios):
 
     id_funcionario = 1
     if len(funcionarios) > 0:
-        id_funcionario = list(funcionarios.keys())[-1] + 1
+        id_funcionario = max(funcionarios.keys()) + 1
 
     funcionarios[id_funcionario] = {
         "Nome": nome_funcionario.title(),

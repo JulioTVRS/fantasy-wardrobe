@@ -112,16 +112,19 @@ def RemoverRoupas(roupas):
             continue
 
         if id_produto in roupas:
-            encontrado = True
-            print("Produto > ID:", id_produto, "-", roupas[id_produto]["Nome"], "| Tamanho:", roupas[id_produto]["Tamanho"], "| Valor: R$", roupas[id_produto]["Valor"], "| Categoria:", roupas[id_produto]["Categoria"])
-            print("Descrição:", roupas[id_produto]["Descricao"])
-            print("Tem certeza que deseja remover esse produto?")
-            decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
+            if roupas[id_produto]["Ativo"]:
+                encontrado = True
+                print("Produto > ID:", id_produto, "-", roupas[id_produto]["Nome"], "| Tamanho:", roupas[id_produto]["Tamanho"], "| Valor: R$", roupas[id_produto]["Valor"], "| Categoria:", roupas[id_produto]["Categoria"])
+                print("Descrição:", roupas[id_produto]["Descricao"])
+                print("Tem certeza que deseja remover esse produto?")
+                decisao = input("(S para Remover ou Qualquer outra tecla para cancelar): ")
 
-            if decisao.lower() == "s":
-                roupas[id_produto]["Ativo"] = False
-                gravar_roupas(roupas)
-                print("Produto removido com sucesso!")
+                if decisao.lower() == "s":
+                    roupas[id_produto]["Ativo"] = False
+                    gravar_roupas(roupas)
+                    print("Produto removido com sucesso!")
+            else:
+                print("Produto inativo. (Já removido)")
         else:
             print("Não existe um produto com esse ID.")
 

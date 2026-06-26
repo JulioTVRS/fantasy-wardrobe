@@ -8,6 +8,11 @@ def ler_id_existente(mensagem, dicionario, mensagem_erro):
     while valor not in dicionario:
         print(mensagem_erro)
         valor = ler_id(mensagem)
+
+    while not dicionario[valor]["Ativo"]:
+        print(mensagem_erro)
+        valor = ler_id(mensagem)
+    
     return valor
 
 def ler_data(mensagem, mensagem_erro):
@@ -185,14 +190,13 @@ def AtualizarLocacoes(locacoes, clientes, roupas):
                 id_produto_loc = ler_id_existente("Digite o ID do produto: ", roupas, "Não existe um produto com esse ID.")
 
                 print("Formato de data: DD/MM/AAAA")
-                checkin_loc = data_atual()
 
                 checkout_loc = ler_data("Digite a data de Check-out: ", "Data inválida, tente novamente!")
 
                 locacoes[id_locacao] = {
                     "ID_Cliente": id_cliente_loc,
                     "ID_Produto": id_produto_loc,
-                    "CheckIn": checkin_loc,
+                    "CheckIn": locacoes[id_locacao]["CheckIn"],
                     "CheckOut": checkout_loc,
                     "Ativo": True
                 }
@@ -232,7 +236,7 @@ def ModuloLocacoes():
         clientes = recuperar_clientes()
         
         limpar()
-        mostrar_menu("Módulo de Funcionários", [
+        mostrar_menu("Módulo de Locações", [
             "1 - Listar locações",
             "2 - Adicionar locação",
             "3 - Remover locação",
