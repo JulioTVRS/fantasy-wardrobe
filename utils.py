@@ -3,28 +3,31 @@ import subprocess
 from datetime import date
 
 def menu(titulo, opcoes):
-    borda = "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
+    borda_cima = "┏" + "┅" * 45 + "┓"
+    borda_centro = "┣" + "┅" * 45 + "┫"
+    borda_baixo = "┗" + "┅" * 45 + "┛"
 
-    menu = borda + "\n"
-    menu += "|" + " " * 35 + "|\n"
-    menu += "|" + titulo.center(35) + "|\n"
-    menu += "|" + " " * 35 + "|\n"
-    menu += borda + "\n"
+    menu = borda_cima + "\n"
+    menu += "┃" + " " * 45 + "┃\n"
+    menu += "┃" + titulo.center(45) + "┃\n"
+    menu += "┃" + " " * 45 + "┃\n"
+    menu += borda_centro + "\n"
 
     for opcao in opcoes:
-        menu += f"| {opcao:<33} |\n"
-    menu += borda
+        menu += f"┃ {opcao:<43} ┃\n"
+    menu += borda_baixo
 
     return menu
 
 def submenu(titulo):
-    borda = "-------------------------------------"
+    borda_cima = "┏" + "┅" * 35 + "┓"
+    borda_baixo = "┗" + "┅" * 35 + "┛"
 
-    menu = borda + "\n"
-    menu += "|" + " " * 35 + "|\n"
-    menu += "|" + titulo.center(35) + "|\n"
-    menu += "|" + " " * 35 + "|\n"
-    menu += borda
+    menu = borda_cima + "\n"
+    menu += "┃" + " " * 35 + "┃\n"
+    menu += "┃" + titulo.center(35) + "┃\n"
+    menu += "┃" + " " * 35 + "┃\n"
+    menu += borda_baixo
 
     return menu
 

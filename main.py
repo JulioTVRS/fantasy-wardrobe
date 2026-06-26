@@ -4,6 +4,7 @@ from roupas import ModuloRoupas
 from clientes import ModuloClientes
 from funcionarios import ModuloFuncionarios
 from locacoes import ModuloLocacoes
+from relatorios import ModuloRelatorios
 
 def Sistema():
     resp = ""
@@ -39,20 +40,7 @@ def Sistema():
             ModuloLocacoes()
 
         elif resp == "5":
-            limpar()
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print("|-                               -|")
-            print("|-      Módulo de Relatórios     -|")
-            print("|-                               -|")
-            print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-            print()
-            print("Total de produtos cadastrados  :", len(roupas))
-            print("Total de clientes cadastrados  :", len(clientes))
-            print("Total de funcionários cadastrados:", len(funcionarios))
-            print("Total de locações cadastradas  :", len(locacoes))
-            print()
-            input("Aperte (ENTER) para retornar.")
-            print()
+            ModuloRelatorios()
 
         elif resp == "6":
             limpar()
