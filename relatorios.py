@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from arquivos import recuperar_roupas, recuperar_clientes, recuperar_funcionarios, recuperar_locacoes
 from utils import mostrar_menu, mostrar_submenu, limpar, data_atual
-from validacao import ler_nome
+from validacao import ler_nome, ler_id_existente
 
 def ListarTodosClientes(clientes):
     limpar()
@@ -106,9 +106,37 @@ def ListarFuncionariosAniversariantes(funcionarios):
     input("Aperte (ENTER) para continuar.")
     print()
 
-def ListarLocacoesAtivas(locacoes, clientes, roupas):
+def ListarTodasLocacoes(locacoes, clientes, roupas):
     limpar()
-    mostrar_submenu("Listando locações ativas")
+    mostrar_submenu("Listando todas as locações")
+
+    encontrados = {}
+
+    for id, value in locacoes.items():
+        if value["Ativo"]:
+            encontrados[id] = value
+
+    if len(encontrados) > 0:
+        print()
+        print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
+        print(f"┃     ID     ┃   Nome do produto              ┃   Nome do cliente              ┃  Data Check-IN   ┃  Data Check-OUT  ┃")
+        print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
+        for id, value in encontrados.items():
+            ID_Produto = value["ID_Produto"]
+            ID_Cliente = value['ID_Cliente']
+            print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]["Nome"]:<30} ┃ {clientes[ID_Cliente]["Nome"]:<30} ┃ {value["CheckIn"]:^16} ┃ {value["CheckOut"]:^16} ┃")
+        print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
+    else:
+        print()
+        print("Nenhuma locação ativa encontrada.")
+
+    print()
+    input("Aperte (ENTER) para continuar.")
+    print()
+
+def ListarLocacoesPendentes(locacoes, clientes, roupas):
+    limpar()
+    mostrar_submenu("Listando locações pendentes")
 
     hoje = datetime.strptime(data_atual(), "%d/%m/%Y").date()
 
@@ -139,6 +167,57 @@ def ListarLocacoesAtivas(locacoes, clientes, roupas):
     input("Aperte (ENTER) para continuar.")
     print()
 
+def ListarLocacoesPeloCliente(locacoes, clientes, roupas):
+    limpar()
+    mostrar_submenu("Listando locações pelo cliente")
+
+    nome_pesquisa = ler_nome("Digite o nome (ou parte do nome) do cliente: ", "O nome não pode ser vazio, tente novamente!")
+
+    encontrados = {}
+    for id, value in clientes.items():
+        if nome_pesquisa.lower().strip() in value['Nome'].lower() and value['Ativo']:
+            encontrados[id] = value
+            
+    if len(encontrados) > 0:
+        print()
+        print("Clientes encontrados:")
+        for id, value in encontrados.items():
+            print(f"ID: {id} - {value['Nome']}")
+
+        id_pesquisa = ler_id_existente("Digite o ID do cliente: ", clientes, "Não existe um cliente com esse ID.")
+
+        locacoespesquisa = {}
+
+        for id, value in locacoes.items():
+            if value["ID_Cliente"] == id_pesquisa:
+                locacoespesquisa[id] = value
+            
+        if len(locacoespesquisa) > 0:
+            limpar()
+            mostrar_submenu("Listando locações pelo cliente")
+
+            print()
+            print(f"┏┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┓")
+            print(f"┃     ID     ┃   Nome do produto              ┃   Nome do cliente              ┃  Data Check-IN   ┃  Data Check-OUT  ┃")
+            print(f"┣┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅╋┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┫")
+            for id, value in locacoespesquisa.items():
+                ID_Produto = value["ID_Produto"]
+                ID_Cliente = value['ID_Cliente']
+                print(f"┃ {str(id).center(10)} ┃ {roupas[ID_Produto]["Nome"]:<30} ┃ {clientes[ID_Cliente]["Nome"]:<30} ┃ {value["CheckIn"]:^16} ┃ {value["CheckOut"]:^16} ┃")
+            print(f"┗┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┻┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┛")
+        else:
+            print()
+            print("Nenhuma locação ativa encontrada.")
+
+    else:
+        print("Não foi encontrado ninguém com esse nome.")
+
+    print()
+    input("Aperte (ENTER) para continuar.")
+    print()
+    
+
+
 
 def ModuloRelatorios():
     limpar()
@@ -155,8 +234,9 @@ def ModuloRelatorios():
             "2 - Listar clientes pelo nome",
             "3 - Clientes aniversariantes (do mês)",
             "4 - Funcionários aniversariantes (do mês)",
-            "5 - Locações ativas",
-            "6 - Locações pelo cliente",
+            "5 - Listar todas as locações",
+            "6 - Locações pendentes",
+            "7 - Locações pelo cliente",
             "0 - Voltar"
         ])
         
@@ -175,8 +255,11 @@ def ModuloRelatorios():
             ListarFuncionariosAniversariantes(funcionarios)
 
         elif resp_relatorios == "5":
-            ListarLocacoesAtivas(locacoes, clientes, roupas)
+            ListarTodasLocacoes(locacoes, clientes, roupas)
 
         elif resp_relatorios == "6":
-            pass
+            ListarLocacoesPendentes(locacoes, clientes, roupas)
+
+        elif resp_relatorios == "7":
+            ListarLocacoesPeloCliente(locacoes, clientes, roupas)
         

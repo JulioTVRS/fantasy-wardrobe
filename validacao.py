@@ -7,6 +7,18 @@ def ler_id(mensagem):
         valor = input(mensagem)
     return int(valor)
 
+def ler_id_existente(mensagem, dicionario, mensagem_erro):
+    valor = ler_id(mensagem)
+    while valor not in dicionario:
+        print(mensagem_erro)
+        valor = ler_id(mensagem)
+
+    while not dicionario[valor]["Ativo"]:
+        print(mensagem_erro)
+        valor = ler_id(mensagem)
+    
+    return valor
+
 def ler_cpf():
     cpf = input("Digite o CPF (apenas números): ")
     while len(cpf) != 11 or not cpf.isdigit():

@@ -1,19 +1,9 @@
 from datetime import datetime, date
 from arquivos import recuperar_locacoes, recuperar_roupas, recuperar_clientes, gravar_locacoes
 from utils import mostrar_menu, mostrar_submenu, limpar, data_atual
-from validacao import ler_id
+from validacao import ler_id, ler_id_existente
 
-def ler_id_existente(mensagem, dicionario, mensagem_erro):
-    valor = ler_id(mensagem)
-    while valor not in dicionario:
-        print(mensagem_erro)
-        valor = ler_id(mensagem)
 
-    while not dicionario[valor]["Ativo"]:
-        print(mensagem_erro)
-        valor = ler_id(mensagem)
-    
-    return valor
 
 def ler_data(mensagem, mensagem_erro):
     data = input(mensagem)
